@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 import { createRoot } from "react-dom/client";
 import React, { useRef, useState } from "react";
@@ -8,12 +8,21 @@ import { useLoader } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
 function App() {
-  // const fbx = useLoader(FBXLoader, "/asset/model.fbx");
+
   return (
-    <div className="App">
-    <h1>Hello World</h1>
+    <div id="canvas-container">
+ì     
+      <Canvas >
+        <ambientLight intensity={0.1}></ambientLight>
+        <directionalLight color={"red"} position = {[0,0,5]}></directionalLight>
+        <mesh>
+          <boxGeometry></boxGeometry>
+          <meshStandardMaterial></meshStandardMaterial>
+        </mesh>
+
+      </Canvas>
     </div>
   );
 }
 
-export default App;
+export default App; 
