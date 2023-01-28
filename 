@@ -1,0 +1,29 @@
+[33mcommit 022e7fdf2e0ed1f115189e41fd71825333f1fa7f[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: riccbarelli <99691825+rb7984@users.noreply.github.com>
+Date:   Fri Jan 27 14:38:23 2023 +0100
+
+    first step
+
+[33mcommit 3af8883d0812063b7f1462ee65b22c27bfb44564[m
+Author: riccbarelli <99691825+rb7984@users.noreply.github.com>
+Date:   Thu Jan 26 14:25:15 2023 +0100
+
+    cleanup
+
+[33mcommit 84957de84c9707d23e48a8ec463f0991a60223ce[m
+Author: riccbarelli <99691825+rb7984@users.noreply.github.com>
+Date:   Wed Jan 25 21:12:49 2023 +0100
+
+    n
+
+[33mcommit 7e74c4eff62829df22579dc324342f0d88723baa[m
+Author: riccbarelli <99691825+rb7984@users.noreply.github.com>
+Date:   Wed Jan 25 14:27:23 2023 +0100
+
+    first steps
+
+[33mcommit 2347176c33b283cbfcb78fa32274bfb73b8ec4dc[m
+Author: riccbarelli <99691825+rb7984@users.noreply.github.com>
+Date:   Wed Jan 25 13:48:24 2023 +0100
+
+    Initialize project using Create React App
