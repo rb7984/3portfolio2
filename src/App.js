@@ -16,11 +16,15 @@ function Model() {
   
   return (
   <>
-    <primitive object={fbx} />
-    <primitive object={p0} />
-    <primitive object={p1} />
-    <primitive object={p2} />
-    <primitive object={prop} />
+    <mesh receiveShadow = {true} castShadow = {true} >
+      
+      <primitive object={fbx} />
+      <primitive object={p0} />
+      <primitive object={p1} />
+      <primitive object={p2} />
+      <primitive object={prop} />
+      
+    </mesh>
   </>
   )
 }
@@ -30,9 +34,9 @@ function App() {
   return (
     <Canvas camera={{ position: [50, 50, 50], fov: 50 }} >
       
-      <ambientLight castShadow intensity={0.5} />
+      <ambientLight castShadow intensity={0.2} />
       
-      <spotLight castShadow shadowMapHeight={2048} intensity={0.4} color={"white"} position={[0, 50, 0]} />
+      <spotLight castShadow shadowCameraFar={50} shadowMapHeight={2048} intensity={0.4} color={"white"} position={[0, 50, 0]} />
       
       <Model />
       
