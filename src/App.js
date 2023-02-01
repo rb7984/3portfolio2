@@ -5,7 +5,6 @@ import "./App.css";
 import { useLoader, Canvas, } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { Box, OrbitControls, PerspectiveCamera, Sphere } from "@react-three/drei";
-import { MeshBasicMaterial } from "three";
 
 function Model() {
   const fbx = useLoader(FBXLoader, "/assets/model.fbx");
@@ -22,7 +21,6 @@ function Model() {
         <primitive object={p1}  />
         <primitive object={p2}  />
         <primitive object={prop}  />
-        <meshStandardMaterial />
       </mesh>
     </>
   );
@@ -30,21 +28,19 @@ function Model() {
 
 function App() {
   return (
-    <Canvas shadows>
+    <Canvas shadows shadowMapHeight = {2048} >
       <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
       <ambientLight intensity={0.2} />
 
       <pointLight
         castShadow = {true}
-        shadowMapHeight={2048}
         intensity={0.4}
         color={"white"}
         position={[0, 50, 0]}
-        distance = {1000}
       />
 
-      <Sphere position = {[0,20,0]} castShadow receiveShadow>
+      <Sphere position = {[0,20,0]} castShadow receiveShadow >
 
         <meshStandardMaterial />
       </Sphere>
