@@ -2,9 +2,10 @@
 // import React, { useRef, useState } from "react";
 // import logo from "./logo.svg";
 import "./App.css";
-import { useLoader, Canvas } from "@react-three/fiber";
+import { useLoader, Canvas, } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { Box, OrbitControls, PerspectiveCamera, Sphere } from "@react-three/drei";
+import { MeshBasicMaterial } from "three";
 
 function Model() {
   const fbx = useLoader(FBXLoader, "/assets/model.fbx");
@@ -15,12 +16,13 @@ function Model() {
 
   return (
     <>
-      <mesh>
+      <mesh >
         <primitive object={fbx} />
-        <primitive object={p0} />
-        <primitive object={p1} />
-        <primitive object={p2} />
-        <primitive object={prop} />
+        <primitive object={p0}  />
+        <primitive object={p1}  />
+        <primitive object={p2}  />
+        <primitive object={prop}  />
+        <meshStandardMaterial />
       </mesh>
     </>
   );
@@ -28,18 +30,29 @@ function Model() {
 
 function App() {
   return (
-    <Canvas>
+    <Canvas shadows>
       <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
-      <ambientLight castShadow intensity={0.2} />
+      <ambientLight intensity={0.2} />
 
-      <spotLight
-        castShadow
+      <pointLight
+        castShadow = {true}
         shadowMapHeight={2048}
         intensity={0.4}
         color={"white"}
         position={[0, 50, 0]}
+        distance = {1000}
       />
+
+      <Sphere position = {[0,20,0]} castShadow receiveShadow>
+
+        <meshStandardMaterial />
+      </Sphere>
+      
+      <Box position = {[0,15,0]} castShadow receiveShadow scale= {3}>
+        <meshStandardMaterial />
+
+      </Box>
 
       <Model />
 
