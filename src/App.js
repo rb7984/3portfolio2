@@ -1,7 +1,7 @@
 // import { createRoot } from "react-dom/client";
 // import React, { useRef, useState } from "react";
-// import logo from "./logo.svg";
 import "./App.css";
+import React from "react";
 import { useLoader, Canvas, } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { Box, OrbitControls, PerspectiveCamera, Sphere } from "@react-three/drei";
@@ -27,25 +27,29 @@ function Model() {
 }
 
 function App() {
+  
   return (
-    <Canvas shadows shadowMapHeight = {2048} >
+    <Canvas shadows>
+
       <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
       <ambientLight intensity={0.2} />
-
+      
       <pointLight
         castShadow = {true}
         intensity={0.4}
-        color={"white"}
-        position={[0, 50, 0]}
+        position={[0, 30, 0]}
+        shadowMapWidth = {2048}
+        shadowMapHeight = {2048}
+        shadowBias = {-0.1}
       />
 
-      <Sphere position = {[0,20,0]} castShadow receiveShadow >
+      <Sphere position = {[0,15,0]} castShadow receiveShadow >
 
         <meshStandardMaterial />
       </Sphere>
       
-      <Box position = {[0,15,0]} castShadow receiveShadow scale= {3}>
+      <Box position = {[0,10,0]} receiveShadow scale= {3}>
         <meshStandardMaterial />
 
       </Box>
