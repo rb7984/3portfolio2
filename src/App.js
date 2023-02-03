@@ -2,7 +2,7 @@
 // import React, { useRef, useState } from "react";
 import "./App.css";
 import React from "react";
-import { useLoader, Canvas } from "@react-three/fiber";
+import { useThree, useLoader, Canvas } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import {
   Box,
@@ -33,7 +33,7 @@ function Model() {
 }
 
 function Model2() {
-  var g = new THREE.SphereGeometry(0.5);
+  var g = new THREE.SphereGeometry(0.5,32,32);
   var m = new THREE.MeshStandardMaterial({ color: "#2c61d4" });
   const test = new THREE.Mesh(g, m);
   test.castShadow = true;
@@ -58,18 +58,57 @@ function Model3() {
 
 function Light() {
   var lightPoint = new THREE.PointLight(0xc9e4ff, 1);
-  lightPoint.position.set(0, 60, 0);
+  
+  lightPoint.position.set(0, 20, 0);
   lightPoint.castShadow = true;
-  lightPoint.shadow.camera.near = 1;
-  lightPoint.shadow.camera.far = 500;
-  lightPoint.shadow.bias = -0.002;
-  lightPoint.shadow.mapSize.set(2048, 2048);
-  return <primitive object={lightPoint} />;
+  // lightPoint.shadow.camera.near = 1;
+  lightPoint.shadow.camera.far = 50;
+  // lightPoint.shadow.radius = 2;
+  // lightPoint.shadow.bias = -0.002;
+  lightPoint.shadow.mapSize.width = 2048;
+  lightPoint.shadow.mapSize.height = 2048;
+
+  var help = new THREE.PointLightHelper(lightPoint,2);
+
+  return(
+    
+    <group>
+
+      <primitive object={help} />;
+      <primitive object={lightPoint} />;
+    </group>
+    
+  );
+}
+
+function Light2() {
+  var lightPoint = new THREE.SpotLight(0xc9e4ff,1)
+  
+  lightPoint.position.set(0, 50, 0);
+  lightPoint.castShadow = true;
+  // lightPoint.shadow.camera.near = 1;
+  lightPoint.shadow.camera.far = 50;
+  // lightPoint.shadow.radius = 2;
+  // lightPoint.shadow.bias = -0.002;
+  lightPoint.shadow.mapSize.width = 4096;
+  lightPoint.shadow.mapSize.height = 4096;
+
+  var help = new THREE.SpotLightHelper(lightPoint,2);
+
+  return(
+    
+    <group>
+
+      <primitive object={help} />;
+      <primitive object={lightPoint} />;
+    </group>
+    
+  );
 }
 
 function App() {
   return (
-    <Canvas shadows>
+    <Canvas shadows >
       {/* <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} /> */}
 
       <ambientLight intensity={0.2} />
@@ -83,7 +122,7 @@ function App() {
         shadowBias={-0.1}
       /> */}
 
-      <Light />
+      <Light2 />
 
       {/* <Sphere position={[0, 15, 0]} castShadow receiveShadow>
         <meshStandardMaterial />
