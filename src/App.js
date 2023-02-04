@@ -2,15 +2,9 @@
 // import React, { useRef, useState } from "react";
 import "./App.css";
 import React from "react";
-import { useThree, useLoader, Canvas } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-import {
-  Box,
-  OrbitControls,
-  PerspectiveCamera,
-  Sphere,
-  Center,
-} from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 
 function Model() {
@@ -54,20 +48,15 @@ function Model() {
   }
 
   //   const fbx = useLoader(FBXLoader, "/assets/model.fbx");
-  //   const p0 = useLoader(FBXLoader, "/assets/p0.fbx");
-  //   const p1 = useLoader(FBXLoader, "/assets/p1.fbx");
-  //   const p2 = useLoader(FBXLoader, "/assets/p2.fbx");
-  //   const prop = useLoader(FBXLoader, "/assets/prop.fbx");
 
   return (
     <>
-      <mesh>
-        <primitive object={groupsList[0]} />
-        <primitive object={groupsList[1]} />
+      <primitive object={groupsList[0]} castShadow receiveShadow />
+
+      {/* <primitive object={groupsList[1]} />
         <primitive object={groupsList[2]} />
-        <primitive object={groupsList[3]} />
-        <primitive object={groupsList[4]} />
-      </mesh>
+        <primitive object={groupsList[3]} /> */}
+      {/* <primitive object={groupsList[4]} /> */}
     </>
   );
 }
@@ -86,20 +75,20 @@ function Plane() {
 }
 
 function Light() {
-  var lightPoint = new THREE.DirectionalLight(0xc9e4ff, 0.5);
+  var light = new THREE.DirectionalLight(0xc9e4ff, 0.5);
 
-  lightPoint.position.set(0, 20, 0);
-  lightPoint.castShadow = true;
-  // lightPoint.shadow.camera.near = 1;
-  lightPoint.shadow.camera.far = 50;
-  // lightPoint.shadow.radius = 2;
-  // lightPoint.shadow.bias = -0.002;
-  lightPoint.shadow.mapSize.width = 2048;
-  lightPoint.shadow.mapSize.height = 2048;
+  light.position.set(0, 20, 0);
+  light.castShadow = true;
+  // light.shadow.camera.near = 1;
+  light.shadow.camera.far = 100;
+  // light.shadow.radius = 2;
+  // light.shadow.bias = -0.002;
+  light.shadow.mapSize.width = 2048;
+  light.shadow.mapSize.height = 2048;
 
   return (
     <group>
-      <primitive object={lightPoint} />;
+      <primitive object={light} />;
     </group>
   );
 }
