@@ -6,6 +6,7 @@ import { Canvas, useLoader } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { OrbitControls, PerspectiveCamera, useFBX } from "@react-three/drei";
 import * as THREE from "three";
+import Modello from "./Modello";
 
 function Model() {
   const fbx = useFBX("assets/model.fbx");
@@ -161,8 +162,8 @@ function App() {
 
       <hemisphereLight intensity={0.2} />
       <Light />
-
-      <Model />
+      <Modello />
+      {/* <Model /> */}
       {/* <Try />
       <Try2 /> */}
       <Plane />
