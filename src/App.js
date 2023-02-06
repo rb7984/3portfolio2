@@ -6,7 +6,10 @@ import { Canvas, useLoader } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { OrbitControls, PerspectiveCamera, useFBX } from "@react-three/drei";
 import * as THREE from "three";
-import { Model } from "./Model";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Suspense } from "react";
+// import { Model } from "./Model";
+import { useGLTF } from "@react-three/drei";
 
 function Plane() {
   var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
@@ -37,6 +40,16 @@ function Light() {
   );
 }
 
+function Modello() {
+  const gltf = useGLTF("/assets/gl/model.gltf");
+
+  return (
+    <mesh castShadow receiveShadow>
+      <primitive object={gltf.scene} />
+    </mesh>
+  );
+}
+
 function App() {
   return (
     <Canvas shadows>
@@ -45,7 +58,8 @@ function App() {
       <hemisphereLight intensity={0.2} />
       <Light />
 
-      <Model />
+      <Modello />
+      {/* <Model /> */}
       {/* <Model /> */}
       {/* <Try />
       <Try2 /> */}
