@@ -6,30 +6,79 @@ import { Canvas, useLoader } from "@react-three/fiber";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { OrbitControls, PerspectiveCamera, useFBX } from "@react-three/drei";
 import * as THREE from "three";
-import Modello from "./Modello";
+import { Model } from "./Island";
 
-function Model() {
-  const fbx = useFBX("assets/model.fbx");
-
-  fbx.castShadow = true;
-  fbx.receiveShadow = true;
-
-  fbx.traverse(function (node) {
-    if (node instanceof THREE.Mesh) {
-      node.castShadow = true;
-      node.receiveShadow = true;
-
-      // const oldMat = node.material;
-
-      // node.material = new THREE.MeshLambertMaterial({
-      //   color: oldMat.color,
-      //   map: oldMat.map,
-      // });
-    }
+function Plane() {
+  var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
+  var m2 = new THREE.MeshStandardMaterial({
+    color: "#2c61d4",
+    side: THREE.DoubleSide,
   });
-
-  return <primitive object={fbx} />;
+  var plane = new THREE.Mesh(g2, m2);
+  plane.rotateX(-Math.PI / 2);
+  plane.translateY(1);
+  plane.receiveShadow = true;
+  return <primitive object={plane} />;
 }
+
+function Light() {
+  var light = new THREE.DirectionalLight(0xc9e4ff, 0.6);
+
+  light.position.set(0, 20, 0);
+  light.castShadow = true;
+  light.shadow.mapSize.width = 2048;
+  light.shadow.mapSize.height = 2048;
+  light.shadow.camera.far = 200;
+
+  return (
+    <group>
+      <primitive object={light} />;
+    </group>
+  );
+}
+
+function App() {
+  return (
+    <Canvas shadows>
+      <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
+
+      <hemisphereLight intensity={0.2} />
+      <Light />
+      
+      <Model />
+      {/* <Model /> */}
+      {/* <Try />
+      <Try2 /> */}
+      <Plane />
+      <OrbitControls />
+    </Canvas>
+  );
+}
+
+export default App;
+
+// function Model() {
+//   const fbx = useFBX("assets/model.fbx");
+
+//   fbx.castShadow = true;
+//   fbx.receiveShadow = true;
+
+//   fbx.traverse(function (node) {
+//     if (node instanceof THREE.Mesh) {
+//       node.castShadow = true;
+//       node.receiveShadow = true;
+
+//       // const oldMat = node.material;
+
+//       // node.material = new THREE.MeshLambertMaterial({
+//       //   color: oldMat.color,
+//       //   map: oldMat.map,
+//       // });
+//     }
+//   });
+
+//   return <primitive object={fbx} />;
+// }
 
 // function Model() {
 //   const fbx = useLoader(FBXLoader, "assets/model.fbx");
@@ -123,53 +172,3 @@ function Model() {
 //   );
 // }
 
-function Plane() {
-  var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
-  var m2 = new THREE.MeshStandardMaterial({
-    color: "#2c61d4",
-    side: THREE.DoubleSide,
-  });
-  var plane = new THREE.Mesh(g2, m2);
-  plane.rotateX(-Math.PI / 2);
-  plane.translateY(1);
-  plane.receiveShadow = true;
-  return <primitive object={plane} />;
-}
-
-function Light() {
-  var light = new THREE.DirectionalLight(0xc9e4ff, 0.6);
-
-  light.position.set(0, 20, 0);
-  light.castShadow = true;
-  light.shadow.mapSize.width = 2048;
-  light.shadow.mapSize.height = 2048;
-  light.shadow.camera.far = 200;
-  // light.shadow.camera.near = 1;
-  // light.shadow.radius = 2;
-  // light.shadow.bias = -0.002;
-
-  return (
-    <group>
-      <primitive object={light} />;
-    </group>
-  );
-}
-
-function App() {
-  return (
-    <Canvas shadows>
-      <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
-
-      <hemisphereLight intensity={0.2} />
-      <Light />
-      <Modello />
-      {/* <Model /> */}
-      {/* <Try />
-      <Try2 /> */}
-      <Plane />
-      <OrbitControls />
-    </Canvas>
-  );
-}
-
-export default App;
