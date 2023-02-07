@@ -5,6 +5,7 @@ import * as THREE from "three";
 // import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Model } from "./Model";
 import { Tree } from "./Tree";
+import { Untitled } from "./Untitled";
 
 function Plane() {
   var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
@@ -60,7 +61,8 @@ function App() {
       <Light />
 
 
-      <Model />
+      {/* <Model /> */}
+      <Untitled/>
 
       <Plane />
       <OrbitControls />
