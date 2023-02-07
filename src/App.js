@@ -26,7 +26,7 @@ function Light() {
   light.castShadow = true;
   light.shadow.mapSize.width = 2048;
   light.shadow.mapSize.height = 2048;
-  light.shadow.camera.far = 200;
+  light.shadow.camera.far = 100;
 
   return (
     <group>
@@ -59,11 +59,9 @@ function App() {
       <hemisphereLight intensity={0.2} />
       <Light />
 
-      {/* <Modello /> */}
-      
-      <Tree/>
-      {/* <Try />
-      <Try2 /> */}
+
+      <Model />
+
       <Plane />
       <OrbitControls />
     </Canvas>
