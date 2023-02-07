@@ -1,15 +1,10 @@
-// import { createRoot } from "react-dom/client";
-// import React, { useRef, useState } from "react";
 import "./App.css";
-import React, { useLayoutEffect } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-import { OrbitControls, PerspectiveCamera, useFBX } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, PerspectiveCamera, BakeShadows } from "@react-three/drei";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Suspense } from "react";
-// import { Model } from "./Model";
-import { useGLTF } from "@react-three/drei";
+// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Model } from "./Model";
+import { Tree } from "./Tree";
 
 function Plane() {
   var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
@@ -40,27 +35,33 @@ function Light() {
   );
 }
 
-function Modello() {
-  const gltf = useGLTF("/assets/gl/model.gltf");
-
-  return (
-    <mesh castShadow receiveShadow>
-      <primitive object={gltf.scene} />
-    </mesh>
-  );
-}
+// function Modello() {
+//   const gltf = useGLTF("/assets/gl/model.gltf");
+//   gltf.scene.traverse( function(object) {
+//     if (object instanceof THREE.Mesh ) {
+//       object.castShadow = true;
+//       object.receiveShadow = true;
+//     }
+//   });
+//   gltf.scene.castShadow = true;
+//   return (
+//     <mesh castShadow receiveShadow >
+//       <primitive object={gltf.scene} />
+//     </mesh>
+//   );
+// }
 
 function App() {
   return (
-    <Canvas shadows>
+    <Canvas shadows dpr={[1, 2]}>
       <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
       <hemisphereLight intensity={0.2} />
       <Light />
 
-      <Modello />
-      {/* <Model /> */}
-      {/* <Model /> */}
+      {/* <Modello /> */}
+      
+      <Tree/>
       {/* <Try />
       <Try2 /> */}
       <Plane />
