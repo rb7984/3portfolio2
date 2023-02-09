@@ -1,12 +1,12 @@
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera, BakeShadows } from "@react-three/drei";
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  BakeShadows,
+} from "@react-three/drei";
 import * as THREE from "three";
-// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-// import { Model } from "./Model";
-// import { Tree } from "./Tree";
-// import { Try } from "./TRY";
-import { Model2 } from "./Model2";
+import { A } from "./A";
 
 function Plane() {
   var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
@@ -37,34 +37,17 @@ function Light() {
   );
 }
 
-// function Modello() {
-//   const gltf = useGLTF("/assets/gl/model.gltf");
-//   gltf.scene.traverse( function(object) {
-//     if (object instanceof THREE.Mesh ) {
-//       object.castShadow = true;
-//       object.receiveShadow = true;
-//     }
-//   });
-//   gltf.scene.castShadow = true;
-//   return (
-//     <mesh castShadow receiveShadow >
-//       <primitive object={gltf.scene} />
-//     </mesh>
-//   );
-// }
-
 function App() {
   return (
-    <Canvas shadows dpr={[1, 2]}>
+    <Canvas shadows>
       <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
       <hemisphereLight intensity={0.2} />
       <Light />
 
       {/* <Try /> */}
-      {/* <Model /> */}
-      <Model2 />
-      {/* <Plane /> */}
+      <A />
+
       <OrbitControls />
     </Canvas>
   );
