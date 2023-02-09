@@ -3,9 +3,10 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, BakeShadows } from "@react-three/drei";
 import * as THREE from "three";
 // import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Model } from "./Model";
-import { Tree } from "./Tree";
-import { Untitled } from "./Untitled";
+// import { Model } from "./Model";
+// import { Tree } from "./Tree";
+// import { Try } from "./TRY";
+import { Model2 } from "./Model2";
 
 function Plane() {
   var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
@@ -60,11 +61,10 @@ function App() {
       <hemisphereLight intensity={0.2} />
       <Light />
 
-
+      {/* <Try /> */}
       {/* <Model /> */}
-      <Untitled/>
-
-      <Plane />
+      <Model2 />
+      {/* <Plane /> */}
       <OrbitControls />
     </Canvas>
   );
