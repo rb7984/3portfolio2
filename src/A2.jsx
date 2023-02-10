@@ -10,7 +10,7 @@ export function A2(props) {
   const { nodes, materials } = useGLTF('/assets/gl/a2.glb')
   return (
     <group {...props} dispose={null}>
-      <group rotation={[Math.PI / 2, 0, 0]} scale ={0.1}>
+      <group rotation={[Math.PI / 2, 0, 0]} scale={0.1}>
         <mesh castShadow receiveShadow geometry={nodes.Object_1.geometry} material={materials['Custom (1)']} />
         <mesh castShadow receiveShadow geometry={nodes.Object_3.geometry} material={materials['Custom (2)']} />
         <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry} material={materials['Custom (1)']} />
