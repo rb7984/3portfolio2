@@ -6,7 +6,7 @@ import {
   BakeShadows,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { A } from "./A";
+import B from './B.jsx';
 
 function Plane() {
   var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
@@ -22,17 +22,21 @@ function Plane() {
 }
 
 function Light() {
-  var light = new THREE.DirectionalLight(0xc9e4ff, 0.6);
+  var light = new THREE.DirectionalLight(0xc9e4ff, 0.3);
 
-  light.position.set(0, 20, 0);
+  light.position.set(30, 30, -30);
+  light.lookAt(0,0,0);
   light.castShadow = true;
   light.shadow.mapSize.width = 2048;
   light.shadow.mapSize.height = 2048;
   light.shadow.camera.far = 100;
 
+  var lH = new THREE.DirectionalLightHelper(light,2);
+
   return (
     <group>
       <primitive object={light} />;
+      <primitive object={lH} />;
     </group>
   );
 }
@@ -40,13 +44,12 @@ function Light() {
 function App() {
   return (
     <Canvas shadows>
-      <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
+      <PerspectiveCamera makeDefault position={[5,5,5]} fov={50} />
 
-      <hemisphereLight intensity={0.2} />
+      <ambientLight intensity={1} />
       <Light />
 
-      {/* <Try /> */}
-      <A />
+      <B />
 
       <OrbitControls />
     </Canvas>
