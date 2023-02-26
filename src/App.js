@@ -5,8 +5,9 @@ import * as THREE from "three";
 import { Model } from "./Model";
 import { useFrame } from "@react-three/fiber";
 import React from "react";
+import { Text } from "@react-three/drei";
 
-const rotationSwitch =true;
+const rotationSwitch = true;
 
 function Plane() {
   var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
@@ -41,54 +42,48 @@ function Light() {
 
   return (
     <group>
-      <primitive object={light} />;
-      {/* <primitive object={lH} />; */}
+      <primitive object={light} />;{/* <primitive object={lH} />; */}
     </group>
   );
 }
 
 function UpdateCamera() {
-
   var clock = new THREE.Clock();
-  
+
   useFrame((state) => {
-    if (rotationSwitch)
-    {
-    const time = clock.getElapsedTime()+20;
-    const k = 0.15;
-    const f = 100;
-    
-    state.camera.position.x = f*Math.sin( time*k );
-    state.camera.position.y = 50;
-    state.camera.position.z = f*Math.cos( time*k );
-    
-    state.camera.lookAt(0, 0, 0);
-    state.camera.updateProjectionMatrix();
+    if (rotationSwitch) {
+      const time = clock.getElapsedTime() + 20;
+      const k = 0.15;
+      const f = 100;
+
+      state.camera.position.x = f * Math.sin(time * k);
+      state.camera.position.y = 50;
+      state.camera.position.z = f * Math.cos(time * k);
+
+      state.camera.lookAt(0, 0, 0);
+      state.camera.updateProjectionMatrix();
     }
     return null;
   });
-  
-  return (
-   null
-  );
+
+  return null;
 }
 
 function Banner() {
-
   return (
-    <div>
-      Hi There! My Name is Riccardo Barelli, 
-      I am a Architecture and Civil Engineering graduate
-      from Bologna. Here are some of my projects!     
-    </div>
+    <Text>
+      Hi There! My Name is Riccardo Barelli, I am a Architecture and Civil
+      Engineering graduate from Bologna. Here are some of my projects!
+    </Text>
   );
 }
 
 function App() {
   return (
     <Canvas shadows dpr={(1, 1)}>
+      <Banner />
       <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
-      
+
       <UpdateCamera />
       <hemisphereLight intensity={0.6} />
       <Light />
@@ -98,7 +93,6 @@ function App() {
         <meshStandardMaterial color={0x0ff000} />
       </mesh> */}
 
-      {/* <Banner /> */}
       <Model />
       <Plane />
       {/* <OrbitControls /> */}
