@@ -3,6 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import { Model } from "./Model";
+import { P0 } from "./P0";
+import { P1 } from "./P1";
 import { useFrame } from "@react-three/fiber";
 import React from "react";
 import { Text } from "@react-three/drei";
@@ -94,6 +96,8 @@ function App() {
       </mesh> */}
 
       <Model />
+      <P0 />
+      <P1 />
       <Plane />
       {/* <OrbitControls /> */}
     </Canvas>
