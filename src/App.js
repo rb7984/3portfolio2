@@ -7,7 +7,6 @@ import { P0 } from "./P0";
 import { P1 } from "./P1";
 import { useFrame } from "@react-three/fiber";
 import React from "react";
-import { Text } from "@react-three/drei";
 
 const rotationSwitch = true;
 
@@ -71,29 +70,14 @@ function UpdateCamera() {
   return null;
 }
 
-function Banner() {
-  return (
-    <Text>
-      Hi There! My Name is Riccardo Barelli, I am a Architecture and Civil
-      Engineering graduate from Bologna. Here are some of my projects!
-    </Text>
-  );
-}
-
 function App() {
   return (
     <Canvas shadows dpr={(1, 1)}>
-      <Banner />
       <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
       <UpdateCamera />
       <hemisphereLight intensity={0.6} />
       <Light />
-
-      {/* <mesh>
-        <boxGeometry args={[10,10,10]} />
-        <meshStandardMaterial color={0x0ff000} />
-      </mesh> */}
 
       <Model />
       <P0 />
