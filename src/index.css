@@ -21,6 +21,55 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.btnNight,
+.btnPrevious,
+.btnNext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    right: 50px;
+    bottom: 50%;
+    z-index: 1;
+    border-radius: 30px;
+    transition: all 0.15s linear;
+}
+
+.btnPrevious{
+    left: 50px;
+}
+
+.btnNight{
+    background-color: rgb(70, 70, 70);
+    bottom: 50px;
+    right: 50px;
+    box-shadow: 0 0 10px 4px #ffffff;
+}
+
+.btnNext:hover,
+.btnPrevious:hover {
+    transform: scale(1.5);
+}
+
+.arrow-left,
+.arrow-right{
+    z-index: 1;
+    display: block;
+    margin: 30px auto;
+    width: 25px;
+    height: 25px;
+    border-top: 9px solid rgb(0, 0, 0);
+    border-left: 9px solid rgb(0, 0, 0);
+}
+.arrow-right{
+    transform: rotate(135deg);
+}
+.arrow-left{
+    transform: rotate(-45deg);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
