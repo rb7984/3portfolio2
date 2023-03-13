@@ -11,8 +11,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Banner />
-<BtnPrevious />
-<BtnNext />
+    <BtnPrevious />
+    <BtnNext />
     <App />
   </React.StrictMode>
 );
