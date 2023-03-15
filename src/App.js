@@ -7,11 +7,11 @@ import { P0 } from "./P0";
 import { P1 } from "./P1";
 import { useFrame } from "@react-three/fiber";
 import React from "react";
-import { BtnNext } from "./BtnNext";
-import { BtnPrevious } from "./BtnPrevious";
+import "./index.css";
+import {Banner} from "./Banner";
 import gsap from "gsap";
 
-const rotationSwitch = true;
+var rotationSwitch = true;
 
 function Plane() {
   var g2 = new THREE.PlaneGeometry(2000, 2000, 8, 8);
@@ -51,6 +51,21 @@ function Light() {
   );
 }
 
+const cP = [
+  [50, 50, 50],
+  [-60, 7, -20],
+  [-42, 10, 3],
+  [-5, 35, 5],
+];
+const cT = [
+  [0, 0, 0],
+  [20, 6, -35],
+  [-30, 7, -2],
+  [40, 35, 40],
+];
+
+var cPC = 0;
+
 function UpdateCamera() {
   var clock = new THREE.Clock();
 
@@ -67,25 +82,30 @@ function UpdateCamera() {
       state.camera.lookAt(0, 0, 0);
       state.camera.updateProjectionMatrix();
     }
+    else 
+    {
+      gsap.to(state.camera.position, {
+
+        x: cP[cPC % cP.length][0],
+        y: cP[cPC % cP.length][1],
+        z: cP[cPC % cP.length][2],
+        duration: 1,
+        onUpdate: function () {
+          state.camera.lookAt(
+            cT[cPC % cP.length][0],
+            cT[cPC % cP.length][1],
+            cT[cPC % cP.length][2]
+          );
+        },
+      });
+    }
+
     return null;
   });
 
   return null;
 }
 
-const cP = [
-  [50, 50, 50],
-  [-60, 7, -20],
-  [-42, 10, 3],
-  [-5, 35, 5],
-];
-const cT = [
-  [0, 0, 0],
-  [20, 6, -35],
-  [-30, 7, -2],
-  [40, 35, 40],
-];
-var cPC = 0;
 
 // CHANGE VIEW
 
@@ -98,28 +118,48 @@ function ChangeView(a) {
   }
   var currentEl = "p" + (cPC % cP.length).toString();
 
-  useFrame((state) => {
-    gsap.to(state.camera.position, {
-      x: cP[cPC % cP.length][0],
-      y: cP[cPC % cP.length][1],
-      z: cP[cPC % cP.length][2],
-      duration: 1,
-      onUpdate: function () {
-        state.camera.lookAt(
-          cT[cPC % cP.length][0],
-          cT[cPC % cP.length][1],
-          cT[cPC % cP.length][2]
-        );
-      },
-    });
-  });
-
-  // document.getElementById(oldEl).className = 'p hidden';
-  // document.getElementById(currentEl).className = 'p visible';
+  if (cPC%4 ==0)
+  {
+    rotationSwitch = true;
+  }
+  else 
+  {
+  rotationSwitch = false;
+  }
+  console.log(cPC);
 }
+
+function BtnNext() {
+
+  function C(){ ChangeView(false);}  
+  onclick = C;
+
+  return (
+  
+  <div className ='btnNext' id = 'next'>
+    <div className = 'arrow-right'></div>
+  </div>
+  )
+}
+
+function BtnPrevious() {
+
+  function C(){ ChangeView(true);}  
+  onclick = C;
+
+  return (
+  <div className="btnPrevious" id = 'previous'>
+  <div className="arrow-left"></div>
+  </div>
+  )
+  }
 
 function App() {
   return (
+    <>
+      <Banner />
+      <BtnNext />
+      <BtnPrevious />
     <Canvas shadows dpr={(1, 1)}>
       <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
@@ -134,6 +174,8 @@ function App() {
       <Plane />
       {/* <OrbitControls /> */}
     </Canvas>
+    
+    </>
   );
 }
 
