@@ -8,7 +8,7 @@ import { P1 } from "./P1";
 import { useFrame } from "@react-three/fiber";
 import React from "react";
 import "./index.css";
-import {Banner} from "./Banner";
+import { Banner } from "./Banner";
 import gsap from "gsap";
 
 var rotationSwitch = true;
@@ -64,8 +64,6 @@ const cT = [
   [40, 35, 40],
 ];
 
-var cPC = 0;
-
 function UpdateCamera() {
   var clock = new THREE.Clock();
 
@@ -81,11 +79,8 @@ function UpdateCamera() {
 
       state.camera.lookAt(0, 0, 0);
       state.camera.updateProjectionMatrix();
-    }
-    else 
-    {
+    } else {
       gsap.to(state.camera.position, {
-
         x: cP[cPC % cP.length][0],
         y: cP[cPC % cP.length][1],
         z: cP[cPC % cP.length][2],
@@ -106,75 +101,70 @@ function UpdateCamera() {
   return null;
 }
 
-
-// CHANGE VIEW
+var cPC = 0;
 
 function ChangeView(a) {
-  var oldEl = "p" + (cPC % cP.length).toString();
-  if (a) {
-    cPC += 1;
-  } else {
-    cPC -= 1;
-  }
-  var currentEl = "p" + (cPC % cP.length).toString();
-
-  if (cPC%4 ==0)
-  {
-    rotationSwitch = true;
-  }
-  else 
-  {
-  rotationSwitch = false;
-  }
+  //   var oldEl = "p" + (cPC % cP.length).toString();
+  //   if (a) {
+  //     cPC += 1;
+  //   } else {
+  //     cPC -= 1;
+  //   }
+  //   var currentEl = "p" + (cPC % cP.length).toString();
+  //   if (cPC % 4 == 0) {
+  //     rotationSwitch = true;
+  //   } else {
+  //     rotationSwitch = false;
+  //   }
   console.log(cPC);
+  console.log(a);
+  console.log("Hello");
 }
 
 function BtnNext() {
-
-  function C(){ ChangeView(false);}  
-  onclick = C;
+  // onclick = () => {
+  //   ChangeView(true);
+  // };
 
   return (
-  
-  <div className ='btnNext' id = 'next'>
-    <div className = 'arrow-right'></div>
-  </div>
-  )
+    <div className="btnNext" id="next">
+      <div className="arrow-right"></div>
+    </div>
+  );
 }
 
 function BtnPrevious() {
-
-  function C(){ ChangeView(true);}  
-  onclick = C;
+  // onclick = () => {
+  //   ChangeView(false);
+  // };
 
   return (
-  <div className="btnPrevious" id = 'previous'>
-  <div className="arrow-left"></div>
-  </div>
-  )
-  }
+    <div className="btnPrevious" id="previous">
+      <div className="arrow-left"></div>
+    </div>
+  );
+}
 
 function App() {
   return (
     <>
       <Banner />
-      <BtnNext />
-      <BtnPrevious />
-    <Canvas shadows dpr={(1, 1)}>
-      <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
+      {/* <BtnPrevious />
+      <BtnNext /> */}
+      <Canvas shadows dpr={(1, 1)}>
+        <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
-      <ChangeView />
-      <UpdateCamera />
-      <hemisphereLight intensity={0.6} />
-      <Light />
+        <ChangeView />
+        <UpdateCamera />
+        <hemisphereLight intensity={0.6} />
+        <Light />
 
-      <Model />
-      <P0 />
-      <P1 />
-      <Plane />
-      {/* <OrbitControls /> */}
-    </Canvas>
-    
+        <Model />
+        <P0 />
+        <P1 />
+        <Plane />
+        {/* <OrbitControls /> */}
+      </Canvas>
     </>
   );
 }
