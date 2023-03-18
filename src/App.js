@@ -10,6 +10,7 @@ import { Light } from './Light'
 import { Plane } from './Plane'
 import { P0 } from './P0'
 import { P1 } from './P1'
+import { P2 } from './P2'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Model />
         <P0 />
         <P1 />
+        <P2 />
         <Plane />
       </Canvas>
     </>
