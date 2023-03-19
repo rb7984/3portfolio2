@@ -1,6 +1,7 @@
 import React, {useState } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
+import LightPopup from './LightPopup'
 
 export function P2(props) {
   const { nodes, materials } = useGLTF('/assets/gl/p2.glb')
@@ -24,6 +25,8 @@ export function P2(props) {
     onPointerLeave ={() => setHover(false)}
     onPointerDown = {() => setZoom(!zoom)}
     >
+      <LightPopup toggle={hovered} p = {[14, 45, 21]}/>
+
       <group rotation={[Math.PI / 2, 0, 0]} scale={1}>
         <mesh castShadow receiveShadow geometry={nodes.Object_1.geometry} material={materials.po_Roof} />
         <mesh castShadow receiveShadow geometry={nodes.Object_10.geometry} material={materials.po_Roof} />
