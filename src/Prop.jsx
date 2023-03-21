@@ -10,9 +10,9 @@ export function Prop(props) {
 
   useFrame(({clock}) =>{
     var a = clock.getElapsedTime();
-    ref.current.position.y = 20*Math.sin(a);  
-    ref.current.position.z = 19*Math.sin(a);
-    ref.current.position.x = 5*Math.sin(a);
+    ref.current.position.x = 2.75 * Math.sin(a) +3;
+    ref.current.position.y = 9.5 * Math.sin(a) + 8;
+    ref.current.position.z = 12.5 * Math.sin(a) + 11;
   }
   )
 
