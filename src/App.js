@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera } from '@react-three/drei'
+import { Stats, PerspectiveCamera } from '@react-three/drei'
 import React from 'react'
 import './index.css'
 import './App.css'
@@ -12,8 +12,14 @@ import { P0 } from './P0'
 import { P1 } from './P1'
 import { P2 } from './P2'
 import { Prop } from './Prop'
+import { useControls } from 'leva'
 
 function App() {
+  const control = useControls({
+    value: 'green'
+    
+  })
+
   return (
     <>
       <Banner />
@@ -30,6 +36,7 @@ function App() {
         <P2 />
         <Prop />
         <Plane />
+        <Stats />
       </Canvas>
     </>
   )
