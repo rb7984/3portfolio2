@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { Stats, PerspectiveCamera } from '@react-three/drei'
-import React from 'react'
+import React, { useState } from 'react'
 import './index.css'
 import './App.css'
 import { UpdateCamera } from './UpdateCamera'
@@ -12,52 +12,50 @@ import { P0 } from './P0'
 import { P1 } from './P1'
 import { P2 } from './P2'
 import { Prop } from './Prop'
-import { ChangeCamera } from './ChangeCamera'
-
-var count = 0
-var trigger = false
-
-function Sum(a) {
-  if (a) {
-    count++
-  } else {
-    count--
-  }
-
-  if (count % 4 === 0) trigger = false
-  else trigger = true
-
-  console.log(count)
-  console.log(trigger)
-}
-
-function BtnPrevious() {
-  return (
-    <div onClick={() => Sum(false)} className="btnPrevious">
-      <div className="arrow-left"></div>
-    </div>
-  )
-}
-
-function BtnNext() {
-  return (
-    <div onClick={() => Sum(true)} className="btnNext">
-      <div className="arrow-right"></div>
-    </div>
-  )
-}
+import { KKK } from './KKK'
 
 function App() {
+  
+  let count= 0
+  var toggle = true
+  
+  function Sum(a) {
+    if (a) {
+      count++
+    } else {
+      count--
+    }
+  
+    if (count % 4 === 0) toggle = true
+    else toggle = false
+  }
+  
+  function BtnPrevious() {
+    return (
+      <div onClick={() => Sum(false)} className="btnPrevious">
+        <div className="arrow-left"></div>
+      </div>
+    )
+  }
+  
+  function BtnNext() {
+    return (
+      <div onClick={() => Sum(true)} className="btnNext">
+        <div className="arrow-right"></div>
+      </div>
+    )
+  }
+
   return (
     <>
       <Banner />
       <BtnPrevious />
       <BtnNext />
+      <KKK trigger={toggle} />
       <Canvas shadows dpr={(1, 1)}>
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
-        <UpdateCamera />
-        <ChangeCamera a={0} trigger={trigger} />
+        <UpdateCamera target={count % 4} trigger={toggle} />
 
         <hemisphereLight intensity={0.6} />
         <Light />
