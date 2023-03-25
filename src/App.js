@@ -12,35 +12,31 @@ import { P0 } from './P0'
 import { P1 } from './P1'
 import { P2 } from './P2'
 import { Prop } from './Prop'
-import { KKK } from './KKK'
 
 function App() {
-  
-  let count= 0
-  var toggle = true
-  
-  function Sum(a) {
-    if (a) {
-      count++
-    } else {
-      count--
-    }
-  
-    if (count % 4 === 0) toggle = true
-    else toggle = false
+  var [track, setTrack] = useState(0)
+
+  var trackPlus = () => {
+    setTrack(track + 1)
+    console.log(track)
   }
-  
+
+  var trackMinus = () => {
+    setTrack(track - 1)
+    console.log(track)
+  }
+
   function BtnPrevious() {
     return (
-      <div onClick={() => Sum(false)} className="btnPrevious">
+      <div onClick={trackMinus} className="btnPrevious">
         <div className="arrow-left"></div>
       </div>
     )
   }
-  
+
   function BtnNext() {
     return (
-      <div onClick={() => Sum(true)} className="btnNext">
+      <div onClick={trackPlus} className="btnNext">
         <div className="arrow-right"></div>
       </div>
     )
@@ -51,11 +47,11 @@ function App() {
       <Banner />
       <BtnPrevious />
       <BtnNext />
-      <KKK trigger={toggle} />
+
       <Canvas shadows dpr={(1, 1)}>
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
-        <UpdateCamera target={count % 4} trigger={toggle} />
+        <UpdateCamera target={track % 4} />
 
         <hemisphereLight intensity={0.6} />
         <Light />

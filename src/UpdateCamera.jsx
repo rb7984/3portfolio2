@@ -1,8 +1,6 @@
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-var rotationSwitch = true
-
 const c = [
   [-60, 7, -20],
   [-42, 10, 3],
@@ -14,14 +12,11 @@ const t = [
   [40, 35, 40]
 ]
 
-
-export function UpdateCamera({target, trigger}) {
+export function UpdateCamera({ target }) {
   var clock = new THREE.Clock()
 
-  // rotationSwitch = trigger
-
   useFrame((state) => {
-    if (trigger) {
+    if (target == 0) {
       const time = clock.getElapsedTime() + 20
       const k = 0.1
       const f = 100
@@ -32,18 +27,16 @@ export function UpdateCamera({target, trigger}) {
 
       state.camera.lookAt(0, 0, 0)
       state.camera.updateProjectionMatrix()
-    }
-    else
-    {
-      state.camera.position.set(c[target])
-      state.camera.lookAt(t[target])
+    } else {
+      state.camera.position.x = c[target - 1][0]
+      state.camera.position.y = c[target - 1][1]
+      state.camera.position.z = c[target - 1][2]
+      // state.camera.position.set(c[target][0], c[target][1], c[target][2])
+      state.camera.lookAt(t[target - 1][0], t[target - 1][1], t[target - 1][2])
     }
 
     return null
   })
 
-
-  console.log(target + trigger)
-  
   return null
 }
