@@ -1,5 +1,5 @@
 import { useFrame } from '@react-three/fiber'
-import * as THREE from 'three'
+// import * as THREE from 'three'
 
 const c = [
   [-60, 7, -20],
@@ -13,11 +13,12 @@ const t = [
 ]
 
 export function UpdateCamera({ target }) {
-  var clock = new THREE.Clock()
+  // var clock = new THREE.Clock()
 
   useFrame((state) => {
-    if (target == 0) {
-      const time = clock.getElapsedTime() + 20
+    if (target === 0) {
+      // const time = clock.getElapsedTime() + 20
+      const time = Date.now() * 0.002 + 20
       const k = 0.1
       const f = 100
 

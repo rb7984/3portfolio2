@@ -74,3 +74,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.visible{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+.hidden{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.2s, opacity 0.5s linear;
+}
+
+.moon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 9px 9px 0 0 #fff77e;
+    position: relative;
+    right: 17%;
+    bottom: 17%;
+}
+
+.sun {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff77e;
+}

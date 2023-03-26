@@ -15,15 +15,23 @@ import { Prop } from './Prop'
 
 function App() {
   var [track, setTrack] = useState(0)
+  var [lightSwitch, setIntensity] = useState(0.4)
+  var [lightSymbol, setLightSymbol] = useState('moon')
 
   var trackPlus = () => {
     setTrack(track + 1)
-    console.log(track)
   }
 
   var trackMinus = () => {
     setTrack(track - 1)
-    console.log(track)
+  }
+
+  var switchIntensity = () => {
+    setIntensity(!lightSwitch)
+    setLightSymbol(
+      lightSwitch === 'moon' ? (lightSwitch = 'sun') : (lightSwitch = 'moon')
+    )
+    console.log(lightSymbol)
   }
 
   function BtnPrevious() {
@@ -42,18 +50,26 @@ function App() {
     )
   }
 
+  function BtnLight() {
+    return (
+      <div onClick={switchIntensity} className="btnNight">
+        <div className={lightSymbol}></div>
+      </div>
+    )
+  }
+
   return (
     <>
       <Banner />
       <BtnPrevious />
       <BtnNext />
-
+      <BtnLight />
       <Canvas shadows dpr={(1, 1)}>
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
         <UpdateCamera target={track % 4} />
 
-        <hemisphereLight intensity={0.6} />
+        <hemisphereLight visible={lightSwitch} intensity={0.6} />
         <Light />
 
         <Model />
