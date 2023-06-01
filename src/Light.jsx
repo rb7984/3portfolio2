@@ -1,7 +1,7 @@
 import React from 'react'
 import * as THREE from 'three'
 
-export function Light({ param }) {
+export function Light({ param, lightIntensity }) {
   var light = new THREE.DirectionalLight(0xc9e4ff, param)
 
   light.position.set(50, 50, -50)
@@ -18,6 +18,7 @@ export function Light({ param }) {
   light.shadow.camera.far = 100
 
   light.visible = param
+  light.intensity = lightIntensity
   return (
     <group>
       <primitive object={light} />;

@@ -15,8 +15,12 @@ import { Prop } from './Prop'
 
 function App() {
   var [track, setTrack] = useState(0)
-  var [lightSwitch, setIntensity] = useState(0.4)
+  var [lightSwitch, setSwitch] = useState(true)
   var [lightSymbol, setLightSymbol] = useState('moon')
+  var [lightIntensity, setLightIntensity] = useState(1)
+
+  var projectsCount = 4
+  var trackCounter = track % projectsCount
 
   var trackPlus = () => {
     setTrack(track + 1)
@@ -27,10 +31,13 @@ function App() {
   }
 
   var switchIntensity = () => {
-    setIntensity(!lightSwitch)
-    setLightSymbol(
-      lightSwitch === 'moon' ? (lightSwitch = 'sun') : (lightSwitch = 'moon')
-    )
+    setSwitch(!lightSwitch)
+
+    setLightSymbol(lightSwitch ? 'sun' : 'moon');
+    
+    setLightIntensity(lightSwitch ? 0.2 : 1);
+
+    console.log(lightSwitch)
     console.log(lightSymbol)
   }
 
@@ -60,17 +67,17 @@ function App() {
 
   return (
     <>
-      <Banner />
+      <Banner visibility={trackCounter}/>
       <BtnPrevious />
       <BtnNext />
       <BtnLight />
       <Canvas shadows dpr={(1, 1)}>
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
-        <UpdateCamera target={track % 4} />
+        <UpdateCamera target={trackCounter} />
 
         <hemisphereLight visible={lightSwitch} intensity={0.6} />
-        <Light />
+        <Light lightIntensity={lightIntensity} />
 
         <Model />
         <P0 />
