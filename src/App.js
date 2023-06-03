@@ -33,9 +33,9 @@ function App() {
   var switchIntensity = () => {
     setSwitch(!lightSwitch)
 
-    setLightSymbol(lightSwitch ? 'sun' : 'moon');
-    
-    setLightIntensity(lightSwitch ? 0.2 : 1);
+    setLightSymbol(lightSwitch ? 'sun' : 'moon')
+
+    setLightIntensity(lightSwitch ? 0.2 : 1)
 
     console.log(lightSwitch)
     console.log(lightSymbol)
@@ -67,7 +67,7 @@ function App() {
 
   return (
     <>
-      <Banner visibility={trackCounter}/>
+      <Banner visibility={trackCounter} />
       <BtnPrevious />
       <BtnNext />
       <BtnLight />

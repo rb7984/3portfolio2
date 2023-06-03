@@ -1,11 +1,14 @@
-import React from "react";
-import "./index.css"
+import React from 'react'
+import './index.css'
 
-export function Banner({visibility}) {
-    return (
-      <div className="banner">
-        Hi There! My Name is Riccardo Barelli, I am a Architecture and Civil
-        Engineering graduate from Bologna. Here are some of my projects!
-      </div>
-    );
+export function Banner({ visibility }) {
+  var banner = [
+    'Hi There! My Name is Riccardo Barelli, I am a Architecture and Civil\nEngineering graduate from Bologna. Here are some of my projects!',
+    'This is the first project, a Pop-Store for Dior, made for my curricular stage at 3dWasp',
+    'This my thesis project',
+    'This is the result of Composition course, for which we designed a cable-car in Bologna'
+  ]
+
+  var textShow = banner[visibility] || 'Error'
+  return <div className="banner">{textShow}</div>
 }

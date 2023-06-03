@@ -7,8 +7,8 @@ export function Light({ param, lightIntensity }) {
   light.position.set(50, 50, -50)
   light.lookAt(0, 0, 0)
   light.castShadow = true
-  light.shadow.mapSize.width = 4096
-  light.shadow.mapSize.height = 4096
+  light.shadow.mapSize.width = 4096 * 0.5
+  light.shadow.mapSize.height = 4096 * 0.5
 
   let cameraDimension = 50
   light.shadow.camera.bottom = -cameraDimension
