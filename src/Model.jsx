@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.1.4 model.glb
 
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
-import * as THREE from 'three'
+// import * as THREE from 'three'
 
 export function Model(props) {
   const { nodes, materials } = useGLTF('/assets/gl/model.glb')
