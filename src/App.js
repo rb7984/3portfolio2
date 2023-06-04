@@ -7,7 +7,7 @@ import { UpdateCamera } from './UpdateCamera'
 import { Banner } from './Banner'
 import { Model } from './Model'
 import { Light } from './Light'
-import { Plane } from './Plane'
+import { Plane, Sky } from './Environment'
 import { P0 } from './P0'
 import { P1 } from './P1'
 import { P2 } from './P2'
@@ -86,6 +86,7 @@ function App() {
         <Prop />
         <Plane />
         <Stats />
+        <Sky />
       </Canvas>
     </>
   )
