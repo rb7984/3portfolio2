@@ -6,7 +6,7 @@ import './App.css'
 import { UpdateCamera } from './UpdateCamera'
 import { Banner } from './Banner'
 import { Model } from './Model'
-import { Light } from './Light'
+import { Light, NightLight } from './Light'
 import { Plane, Sky } from './Environment'
 import { P0 } from './P0'
 import { P1 } from './P1'
@@ -77,7 +77,8 @@ function App() {
         <UpdateCamera target={trackCounter} />
 
         <hemisphereLight visible={lightSwitch} intensity={0.6} />
-        <Light lightIntensity={lightIntensity} />
+        <Light lightIntensity={lightIntensity} lightSwitch={lightSwitch} />
+        <NightLight lightSwitch={!lightSwitch} />
 
         <Model />
         <P0 />
@@ -86,7 +87,7 @@ function App() {
         <Prop />
         <Plane />
         <Stats />
-        <Sky />
+        <Sky lightSwitch={lightSwitch}/>
       </Canvas>
     </>
   )

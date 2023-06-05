@@ -1,30 +1,39 @@
 import * as THREE from 'three'
 import { useThree } from '@react-three/fiber'
-import skyTexture from './Sky.png'
+import skyTexture from './SkyNight.png'
 
 var skyDimensions = 200
 
-export function Sky() {
+export function Sky({lightSwitch}) {
   const { scene } = useThree()
 
-  // scene.background = new THREE.Color('#4287f5')
-  // scene.background = new THREE.TextureLoader().load(skyImage)
+  // var color = lightSwitch ? '#9ec3ff' : '#3d367a'
+  // '#9ec3ff' : '#ea9eff'
+  
+  const material = new THREE.MeshBasicMaterial()
 
-  const textureLoader = new THREE.TextureLoader()
+  if (lightSwitch)
+  {
+    var color = '#9ec3ff'
+    material.color = new THREE.Color(color)
+    // scene.background = new THREE.Color(color)
+  }
+  else
+  {
+    const textureLoader = new THREE.TextureLoader()
+    
+    const texture = textureLoader.load(skyTexture)
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set(20,20) // Adjust the repeat values as needed
 
-  const texture = textureLoader.load(skyTexture)
-  texture.wrapS = THREE.RepeatWrapping
-  texture.wrapT = THREE.RepeatWrapping
-  texture.repeat.set(3, 1) // Adjust the repeat values as needed
-
-  const material = new THREE.MeshBasicMaterial({
-    map: texture,
-    side: THREE.BackSide
-  })
+    material.map = texture
+    material.side = THREE.BackSide
+  }
 
   const skyGeometry = new THREE.SphereGeometry(skyDimensions, 32, 32)
   const skyMesh = new THREE.Mesh(skyGeometry, material)
-
+      
   scene.add(skyMesh)
 
   return null
