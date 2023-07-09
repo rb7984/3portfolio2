@@ -12,6 +12,7 @@ import { P0 } from './P0'
 import { P1 } from './P1'
 import { P2 } from './P2'
 import { Prop } from './Prop'
+import { Page } from './Page'
 
 function App() {
   var [track, setTrack] = useState(0)
@@ -67,10 +68,6 @@ function App() {
 
   return (
     <>
-      <Banner visibility={trackCounter} />
-      <BtnPrevious />
-      <BtnNext />
-      <BtnLight />
       <Canvas shadows dpr={(1, 1)}>
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
@@ -87,8 +84,13 @@ function App() {
         <Prop />
         <Plane />
         <Stats />
-        <Sky lightSwitch={lightSwitch}/>
+        <Sky lightSwitch={lightSwitch} />
       </Canvas>
+      {trackCounter !== 0 && <Page />}
+      <Banner visibility={trackCounter} />
+      <BtnPrevious />
+      <BtnNext />
+      <BtnLight />
     </>
   )
 }
