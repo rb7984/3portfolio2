@@ -1,18 +1,8 @@
-.banner{
-    font-family: 'Poppins', sans-serif;    
-    display: flex;
-    flex-direction: column;
+.page {
+    font-family: 'Poppins', sans-serif;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 60%;
-    left: 20%;
-    top: 10%;
-    /* left: 50%; */
-    z-index: 1;
-}
-
-.page {
+    text-align: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -63,6 +53,21 @@ body {
     transform: scale(1.5);
 }
 
+.btnDown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    width: 60px;
+    height: 60px;
+    left: 50%;
+    z-index: 1;
+    border-radius: 30px;
+    transition: all 0.15s linear;
+    animation: arrow-animation 1s infinite;
+}
+
+.arrow-down,
 .arrow-left,
 .arrow-right{
     z-index: 2;
@@ -78,6 +83,26 @@ body {
 }
 .arrow-left{
     transform: rotate(-45deg);
+}
+.arrow-left{
+    transform: rotate(-45deg);
+}
+.arrow-down{
+    border-top: 4px solid rgb(255, 255, 255);
+    border-left: 4px solid rgb(255, 255, 255);
+    transform: rotate(-135deg);
+}
+
+@keyframes arrow-animation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 code {

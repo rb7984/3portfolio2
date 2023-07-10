@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import './index.css'
 import './App.css'
 import { UpdateCamera } from './UpdateCamera'
-import { Banner } from './Banner'
+// import { Banner } from './Banner'
 import { Model } from './Model'
 import { Light, NightLight } from './Light'
 import { Plane, Sky } from './Environment'
@@ -83,11 +83,11 @@ function App() {
         <P2 />
         <Prop />
         <Plane />
-        <Stats />
+        {/* <Stats /> */}
         <Sky lightSwitch={lightSwitch} />
       </Canvas>
-      {trackCounter !== 0 && <Page />}
-      <Banner visibility={trackCounter} />
+      {trackCounter !== 0 && <Page trackCounter={trackCounter} />}
+      {/* <Banner visibility={trackCounter} /> */}
       <BtnPrevious />
       <BtnNext />
       <BtnLight />

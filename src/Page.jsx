@@ -1,90 +1,14 @@
 import React from 'react'
 import './index.css'
 
-export function Page() {
+export function Page({trackCounter}) {
   return (
-    <div className="page">
-      <h2>Scrollable Page Content</h2>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
-      <p>
-        This is the scrollable content that appears when the "Next" button is
-        pressed.
-      </p>
+    <div className = "page">
+      <div style={{padding: "8% 0 3% 0"}}>This is the first project, a Pop-Up Store for Dior, made for my curricular stage at 3dWasp.</div>
+      
+      <div className='btnDown'>
+        <div className='arrow-down'></div>
+      </div>
     </div>
   )
 }
