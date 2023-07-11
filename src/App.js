@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber'
-import { Stats, PerspectiveCamera } from '@react-three/drei'
+import { PerspectiveCamera } from '@react-three/drei'
+// import { Stats} from '@react-three/drei'
 import React, { useState } from 'react'
 import './index.css'
 import './App.css'
@@ -68,6 +69,7 @@ function App() {
 
   return (
     <>
+
       <Canvas shadows dpr={(1, 1)}>
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
@@ -86,6 +88,7 @@ function App() {
         {/* <Stats /> */}
         <Sky lightSwitch={lightSwitch} />
       </Canvas>
+
       {trackCounter !== 0 && <Page trackCounter={trackCounter} />}
       {/* <Banner visibility={trackCounter} /> */}
       <BtnPrevious />

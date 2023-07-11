@@ -1,32 +1,14 @@
-import React, { useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import LightPopup from './LightPopup'
 
-export function P1(props) {
+export function P1() {
   const { nodes, materials } = useGLTF('/assets/gl/p1.glb')
 
-  const [hovered, setHover] = useState()
-  const[zoom, setZoom] = useState(false)
-
-  useFrame((state) => {
-    if (zoom)
-    {
-      state.camera.position.set(-42,10,3);
-      state.camera.lookAt(-30,7,-2);
-    }
-  })
-
   return (
-    <group
-    {...props}
-    dispose={null}
-    onPointerOver ={() => setHover(true)}
-    onPointerLeave ={() => setHover(false)}
-    onPointerDown = {() => setZoom(!zoom)}
-    >
+    <group>
 
-      <LightPopup toggle={hovered} p = {[-23, 20, -5]}/>
+      <LightPopup p = {[-23, 20, -5]}/>
 
       <group rotation={[Math.PI / 2, 0, 0]} scale={1}>
         <mesh castShadow receiveShadow geometry={nodes.Object_1.geometry} material={materials['Plaster.001']} />
