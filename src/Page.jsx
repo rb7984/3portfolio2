@@ -32,8 +32,9 @@ export function Page({trackCounter}) {
 
   return (
     <div className = "page" ref={pageRef}>
-      <div style={{padding: "8% 0 3% 0"}}>This is the first project, a Pop-Up Store for Dior, made for my curricular stage at 3dWasp.</div>
-      
+      <div style={{padding: "8% 0 0 0"}}>This is the first project, a Pop-Up Store for Dior, made for my curricular stage at 3dWasp.</div>
+      <p style={{color: 'white', fontSize: '15px'}}>Scroll down!</p>
+
       <div className='btnDown'>
         <div className='arrow-down'></div>
       </div>
@@ -93,7 +94,7 @@ export function Page({trackCounter}) {
             backgroundColor: 'white',
             margin: '20px auto',
           }}
-        ></div> {/* Added white div element */}
+        ></div>
       A <br/>
       A <br/>
       A <br/>

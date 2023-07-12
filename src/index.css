@@ -1,7 +1,7 @@
 .page {
     font-family: 'Poppins', sans-serif;
-    justify-content: center;
-    align-items: center;
+
+
     text-align: center;
     position: fixed;
     top: 0;
@@ -15,7 +15,6 @@
 }
 
 html, body {
-    height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -23,8 +22,6 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
 
 .btnNight,
 .btnPrevious,
@@ -59,13 +56,8 @@ html, body {
 }
 
 .btnDown {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position:absolute;
-    width: 60px;
-    height: 60px;
-    left: 48.5%;
+    width: 5%;
+    margin: auto;    
     z-index: 1;
     border-radius: 30px;
     transition: all 0.15s linear;
