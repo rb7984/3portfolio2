@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import './index.css'
 import './App.css'
 import { UpdateCamera } from './UpdateCamera'
-// import { Banner } from './Banner'
 import { Model } from './Model'
 import { Light, NightLight } from './Light'
 import { Plane, Sky } from './Environment'
@@ -69,8 +68,8 @@ function App() {
 
   return (
     <>
-
       <Canvas shadows dpr={(1, 1)}>
+        {/* <Stats /> */}
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
         <UpdateCamera target={trackCounter} />
@@ -85,12 +84,11 @@ function App() {
         <P2 />
         <Prop />
         <Plane />
-        {/* <Stats /> */}
         <Sky lightSwitch={lightSwitch} />
       </Canvas>
 
       {trackCounter !== 0 && <Page trackCounter={trackCounter} />}
-      {/* <Banner visibility={trackCounter} /> */}
+
       <BtnPrevious />
       <BtnNext />
       <BtnLight />

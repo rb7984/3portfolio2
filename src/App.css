@@ -1,42 +1,3 @@
-/* .App {
-  text-align: center;
-} */
-
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-/* .App-link {
-  color: #61dafb;
-} */
-
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 html,
@@ -46,14 +7,13 @@ body,
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-#scene-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: skyblue;
-}
 * {
   box-sizing: border-box;
 }
@@ -72,6 +32,20 @@ body,
     z-index: 2;
 }
 
+.page {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    z-index: 1;
+    transition: background-color 0.5s ease; /* Add transition for smooth color change */
+    background-color: rgba(0, 0, 0, 0); /* Set initial background color */
+}
+
 .visible{
     visibility: visible;
     opacity: 1;
@@ -82,21 +56,6 @@ body,
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.2s, opacity 0.5s linear;
-}
-
-.projectPage{
-    font-family: 'Poppins', sans-serif;
-    color:blanchedalmond;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center;
-    align-items: center;*/
-    position: absolute; 
-    z-index: 3;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    /* opacity: 0.9; */
 }
 
 .btnNight,
@@ -110,7 +69,7 @@ body,
     height: 70px;
     right: 50px;
     bottom: 50%;
-    z-index: 1;
+    z-index: 2;
     border-radius: 40px;
     transition: all 0.15s linear;
 }
@@ -126,11 +85,33 @@ body,
     box-shadow: 0 0 10px 4px #ffffff;
 }
 
+.btnDown {
+    width: 5%;
+    margin: auto;    
+    z-index: 1;
+    border-radius: 30px;
+    transition: all 0.15s linear;
+    animation: btnDown 1s infinite;
+}
+
+@keyframes btnDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .btnNext:hover,
 .btnPrevious:hover {
     transform: scale(1.3);
 }
 
+.arrow-down,
 .arrow-left,
 .arrow-right{
     z-index: 1;
@@ -146,6 +127,11 @@ body,
 }
 .arrow-left{
     transform: rotate(-45deg);
+}
+.arrow-down{
+    border-top: 4px solid rgb(255, 255, 255);
+    border-left: 4px solid rgb(255, 255, 255);
+    transform: rotate(-135deg);
 }
 
 .moon {
@@ -165,36 +151,7 @@ body,
     background-color: #fff77e;
 }
 
-.projectButton{
-    margin: 15px;
-    padding: 8px;
-    background: #adacac;
-    opacity: 1;
-    /* opacity: 80%; */
-    border-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
-    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
-    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
-    rgba(0, 0, 0, 0.06) 0px 2px 1px,
-    rgba(0, 0, 0, 0.09) 0px 4px 2px,
-    rgba(0, 0, 0, 0.09) 0px 8px 4px,
-    rgba(0, 0, 0, 0.09) 0px 16px 8px,
-    rgba(0, 0, 0, 0.09) 0px 32px 16px;
-}
-
-.closeButton{
-    /* margin: 15px; */
-    z-index: 4;
-    color: black;
-    position: fixed;
-    display: flex;
-    top: 5%;
-    right: 5%;
-    width: 30px;
-    height: 30px;
-    padding: 3px;
-    background: #adacac;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-}
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+	  monospace;
+  }
