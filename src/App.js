@@ -4,7 +4,7 @@ import { PerspectiveCamera } from '@react-three/drei'
 import React, { useState } from 'react'
 import './index.css'
 import './App.css'
-import { UpdateCamera } from './UpdateCamera'
+// import { UpdateCamera } from './UpdateCamera'
 import { Model } from './Model'
 import { Light, NightLight } from './Light'
 import { Plane, Sky } from './Environment'
@@ -13,6 +13,7 @@ import { P1 } from './P1'
 import { P2 } from './P2'
 import { Prop } from './Prop'
 import { Page } from './Page'
+import { UpdateCamera2 } from './UpdateCamera2'
 
 function App() {
   var [track, setTrack] = useState(0)
@@ -72,7 +73,7 @@ function App() {
         {/* <Stats /> */}
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
-        <UpdateCamera target={trackCounter} />
+        <UpdateCamera2 target={trackCounter} />
 
         <hemisphereLight visible={lightSwitch} intensity={0.6} />
         <Light lightIntensity={lightIntensity} lightSwitch={lightSwitch} />
