@@ -38,9 +38,6 @@ function App() {
     setLightSymbol(lightSwitch ? 'sun' : 'moon')
 
     setLightIntensity(lightSwitch ? 0.2 : 1)
-
-    console.log(lightSwitch)
-    console.log(lightSymbol)
   }
 
   function BtnPrevious() {

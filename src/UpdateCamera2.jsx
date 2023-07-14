@@ -1,4 +1,6 @@
 import { useFrame } from '@react-three/fiber'
+import React from 'react';
+import * as THREE from 'three';
 
 const c = [
   [-60, 7, -20],
@@ -12,61 +14,46 @@ const t = [
   [40, 35, 40]
 ]
 
-export function UpdateCamera2({ target }) {
+export const UpdateCamera2 = React.memo(({ target }) => {
   const duration = 1.5 // Duration of the lerp animation in seconds
   let time = 0 // Elapsed time during the lerp animation
 
   useFrame((state, delta) => {
     if (target === 0) {
-      const time = Date.now() * 0.002 + 20
+      const circularTime = Date.now() * 0.002 + 20
       const k = 0.1
       const f = 100
 
-      state.camera.position.x = f * Math.sin(time * k)
+      state.camera.position.x = f * Math.sin(circularTime * k)
       state.camera.position.y = 50
-      state.camera.position.z = f * Math.cos(time * k)
+      state.camera.position.z = f * Math.cos(circularTime * k)
 
       state.camera.lookAt(0, 0, 0)
       state.camera.updateProjectionMatrix()
+      
     } else {
-      const cameraStart = state.camera.position
-      const cameraEnd = c[target]
-      const targetStart = target === 1 ? [0, 0, 0] : t[target - 1]
-      const targetEnd = t[target]
+      const cameraStart = state.camera.position.clone()
+      const cameraEnd = new THREE.Vector3(c[target - 1][0], c[target - 1][1], c[target - 1][2])
+      const targetStart = target === 1 ? new THREE.Vector3(0, 0, 0) : new THREE.Vector3(t[target - 2][0], t[target - 2][1], t[target - 2][2])
+      const targetEnd = new THREE.Vector3(t[target - 1][0], t[target - 1][1], t[target - 1][2])
 
       if (time <= duration) {
         // Perform lerp animation
         const t = time / duration
-        state.camera.position.x = lerp(cameraStart[0], cameraEnd[0], t)
-        state.camera.position.y = lerp(cameraStart[1], cameraEnd[1], t)
-        state.camera.position.z = lerp(cameraStart[2], cameraEnd[2], t)
 
-        state.camera.lookAt(
-          lerp(targetStart[0], targetEnd[0], t),
-          lerp(targetStart[1], targetEnd[1], t),
-          lerp(targetStart[2], targetEnd[2], t)
-        )
+        state.camera.position.lerpVectors(cameraStart, cameraEnd, t);
+        state.camera.lookAt(targetStart.lerp(targetEnd, t));
 
         time += delta
-      } else {
-        // Animation completed, set the final position and rotation
-        state.camera.position.x = c[target - 1][0]
-        state.camera.position.y = c[target - 1][1]
-        state.camera.position.z = c[target - 1][2]
 
-        state.camera.lookAt(
-          t[target - 1][0],
-          t[target - 1][1],
-          t[target - 1][2]
-        )
+      } else {
+        // Animation completed
+
+        state.camera.position.copy(cameraEnd);
+        state.camera.lookAt(targetEnd);
       }
     }
   })
 
   return null
-}
-
-// Helper function for linear interpolation (lerp)
-function lerp(start, end, t) {
-  return (1 - t) * start + t * end
-}
+})

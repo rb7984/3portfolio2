@@ -32,7 +32,7 @@ export function UpdateCamera({ target }) {
       state.camera.position.x = c[target - 1][0]
       state.camera.position.y = c[target - 1][1]
       state.camera.position.z = c[target - 1][2]
-      // state.camera.position.set(c[target][0], c[target][1], c[target][2])
+
       state.camera.lookAt(t[target - 1][0], t[target - 1][1], t[target - 1][2])
     }
 
