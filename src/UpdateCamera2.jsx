@@ -1,6 +1,6 @@
 import { useFrame } from '@react-three/fiber'
-import React from 'react';
-import * as THREE from 'three';
+import React from 'react'
+import * as THREE from 'three'
 
 const c = [
   [-60, 7, -20],
@@ -13,6 +13,8 @@ const t = [
   [-30, 7, -2],
   [40, 35, 40]
 ]
+
+const speedProportion = 3
 
 export const UpdateCamera2 = React.memo(({ target }) => {
   const duration = 1.5 // Duration of the lerp animation in seconds
@@ -30,27 +32,41 @@ export const UpdateCamera2 = React.memo(({ target }) => {
 
       state.camera.lookAt(0, 0, 0)
       state.camera.updateProjectionMatrix()
-      
     } else {
       const cameraStart = state.camera.position.clone()
-      const cameraEnd = new THREE.Vector3(c[target - 1][0], c[target - 1][1], c[target - 1][2])
-      const targetStart = target === 1 ? new THREE.Vector3(0, 0, 0) : new THREE.Vector3(t[target - 2][0], t[target - 2][1], t[target - 2][2])
-      const targetEnd = new THREE.Vector3(t[target - 1][0], t[target - 1][1], t[target - 1][2])
+      const cameraEnd = new THREE.Vector3(
+        c[target - 1][0],
+        c[target - 1][1],
+        c[target - 1][2]
+      )
+      const targetStart =
+        target === 1
+          ? new THREE.Vector3(0, 0, 0)
+          : new THREE.Vector3(
+              t[target - 2][0],
+              t[target - 2][1],
+              t[target - 2][2]
+            )
+      const targetEnd = new THREE.Vector3(
+        t[target - 1][0],
+        t[target - 1][1],
+        t[target - 1][2]
+      )
 
       if (time <= duration) {
         // Perform lerp animation
         const t = time / duration
+        const t1 = time / (duration / speedProportion)
 
-        state.camera.position.lerpVectors(cameraStart, cameraEnd, t);
-        state.camera.lookAt(targetStart.lerp(targetEnd, t));
+        state.camera.position.lerpVectors(cameraStart, cameraEnd, t)
+
+        if (time <= duration / speedProportion) {
+          state.camera.lookAt(targetStart.lerp(targetEnd, t1))
+        } else {
+          state.camera.lookAt(targetEnd)
+        }
 
         time += delta
-
-      } else {
-        // Animation completed
-
-        state.camera.position.copy(cameraEnd);
-        state.camera.lookAt(targetEnd);
       }
     }
   })
