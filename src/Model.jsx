@@ -12,7 +12,7 @@ export function Model(props) {
 
   const createEdgeLines = (geometry) => {
     const edgesGeometry = new THREE.EdgesGeometry(geometry)
-    const edgesMaterial = new THREE.LineBasicMaterial({ color: 'black', linewidth: 1000 })
+    const edgesMaterial = new THREE.LineBasicMaterial({ color: '#5c5c5c', linewidth: 1000 })
     const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial)
     return <primitive object={edges} />
   }
