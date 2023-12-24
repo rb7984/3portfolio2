@@ -10,12 +10,12 @@ export function Light({ lightIntensity, lightSwitch }) {
   light.shadow.mapSize.width = 4096
   light.shadow.mapSize.height = 4096
 
-  let cameraDimension = 50
+  let cameraDimension = 150
   light.shadow.camera.bottom = -cameraDimension
   light.shadow.camera.top = cameraDimension
   light.shadow.camera.left = -cameraDimension
   light.shadow.camera.right = cameraDimension
-  light.shadow.camera.far = 100
+  light.shadow.camera.far = 300
 
   light.visible = lightSwitch
   light.intensity = lightIntensity

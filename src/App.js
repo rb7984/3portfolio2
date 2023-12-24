@@ -14,6 +14,7 @@ import { P2 } from './P2'
 import { Prop } from './Prop'
 import { Page } from './Page'
 import { UpdateCamera2 } from './UpdateCamera2'
+import { SimpleModel } from './SimpleModel'
 
 function App() {
   var [track, setTrack] = useState(0)
@@ -73,14 +74,14 @@ function App() {
         <UpdateCamera2 target={trackCounter} />
 
         <hemisphereLight visible={lightSwitch} intensity={0.6} />
-        <Light lightIntensity={lightIntensity} lightSwitch={lightSwitch} />
+        <Light lightIntensity={lightIntensity} lightSwitch={lightSwitch}/>
         <NightLight lightSwitch={!lightSwitch} />
 
-        <Model />
-        <P0 />
+        <SimpleModel />
+        {/* <P0 />
         <P1 />
         <P2 />
-        <Prop />
+        <Prop /> */}
         <Plane />
         <Sky lightSwitch={lightSwitch} />
       </Canvas>
