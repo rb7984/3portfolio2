@@ -1,5 +1,5 @@
-import { useEffect} from 'react'
-import { useThree } from '@react-three/fiber'
+import { useEffect, useRef } from 'react'
+import { useThree, useFrame } from '@react-three/fiber'
 import { useGLTF, Edges } from '@react-three/drei'
 import * as THREE from 'three'
 
@@ -57,7 +57,7 @@ export function Plane() {
   return <primitive object={plane} />
 }
 
-export function SimpleModel({paperSpace}) {
+export function SimpleModel({ paperSpace }) {
   const { nodes, materials } = useGLTF('/assets/gl/simpleModel.glb')
 
   var blankMaterial = [
@@ -106,4 +106,43 @@ export function SimpleModel({paperSpace}) {
   )
 }
 
+export function PaperPlane({ switchPaperSpace }) {
+  const { nodes } = useGLTF('/assets/gl/paperPlane.glb')
+  const ref = useRef()
+
+  useFrame(() => {
+    const circularTime = Date.now() * 0.002 + 20
+    const k = 0.2
+    const f = 50
+
+    ref.current.position.x = f * Math.sin(circularTime * k)
+    ref.current.position.y = 30 + 5 * Math.sin(circularTime * 0.5)
+    ref.current.position.z = f * Math.cos(circularTime * k)
+
+    // Calculate angle between radial vector and x-axis
+    const angle = Math.atan2(ref.current.position.z, ref.current.position.x)
+
+    // Set rotation to align with the tangent vector
+    ref.current.rotation.z = angle + Math.PI
+  })
+
+  return (
+    <group
+      ref={ref}
+      onClick={switchPaperSpace}
+      rotation={[Math.PI / 2, 0, 0]}
+      scale={1}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.PaperPlane.geometry}
+        material={new THREE.MeshStandardMaterial({ color: 'white' })}>
+        <Edges color={'black'} threshold={1}></Edges>
+      </mesh>
+    </group>
+  )
+}
+
 useGLTF.preload('/simpleModel.glb')
+
+useGLTF.preload('/paperPlane.glb')

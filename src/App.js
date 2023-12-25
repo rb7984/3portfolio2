@@ -2,15 +2,12 @@ import './index.css'
 import './App.css'
 import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera } from '@react-three/drei'
-import { Stats} from '@react-three/drei'
+import { Stats } from '@react-three/drei'
 import React, { useState } from 'react'
 // import { UpdateCamera } from './UpdateCamera'
-// import { Model } from './Model'
 import { Light, NightLight } from './Light'
-import { Plane, Sky, SimpleModel } from './Environment'
-import { PaperPlane } from './paperPlane'
-import { P0, P1 } from './P0'
-// import { P1 } from './P1'
+import { Plane, Sky, SimpleModel, PaperPlane } from './Environment'
+import { P0, P1 } from './Projects'
 // import { P2 } from './P2'
 // import { Prop } from './Prop'
 import { Page } from './Page'
@@ -44,8 +41,6 @@ function App() {
 
   var switchPaperSpace = () => {
     setPaperSpace((paperSpace) => !paperSpace)
-    console.log('click')
-    console.log(paperSpace)
   }
 
   function BtnPrevious() {
@@ -81,13 +76,13 @@ function App() {
         <UpdateCamera2 target={trackCounter} />
 
         <hemisphereLight visible={lightSwitch} intensity={0.6} />
-        <Light lightIntensity={lightIntensity} lightSwitch={lightSwitch}/>
+        <Light lightIntensity={lightIntensity} lightSwitch={lightSwitch} />
         <NightLight lightSwitch={!lightSwitch} />
 
-        <SimpleModel paperSpace={paperSpace}/>
+        <SimpleModel paperSpace={paperSpace} />
         <PaperPlane switchPaperSpace={switchPaperSpace} />
-        <P0 paperSpace={paperSpace}/>
-        <P1 paperSpace={paperSpace}/>
+        <P0 paperSpace={paperSpace} />
+        <P1 paperSpace={paperSpace} />
         {/* <P2 />
         <Prop /> */}
         <Plane />
