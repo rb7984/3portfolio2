@@ -2,16 +2,17 @@ import './index.css'
 import './App.css'
 import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera } from '@react-three/drei'
-// import { Stats} from '@react-three/drei'
+import { Stats} from '@react-three/drei'
 import React, { useState } from 'react'
 // import { UpdateCamera } from './UpdateCamera'
 // import { Model } from './Model'
 import { Light, NightLight } from './Light'
-import { Plane, Sky, SimpleModel, PaperPlane } from './Environment'
-import { P0 } from './P0'
-import { P1 } from './P1'
-import { P2 } from './P2'
-import { Prop } from './Prop'
+import { Plane, Sky, SimpleModel } from './Environment'
+import { PaperPlane } from './paperPlane'
+import { P0, P1 } from './P0'
+// import { P1 } from './P1'
+// import { P2 } from './P2'
+// import { Prop } from './Prop'
 import { Page } from './Page'
 import { UpdateCamera2 } from './UpdateCamera2'
 
@@ -20,7 +21,7 @@ function App() {
   var [lightSwitch, setSwitch] = useState(true)
   var [lightSymbol, setLightSymbol] = useState('moon')
   var [lightIntensity, setLightIntensity] = useState(1)
-  var [paperSwitch, switchPaperWorld] = useState(false)
+  var [paperSpace, setPaperSpace] = useState(false)
 
   var projectsCount = 4
   var trackCounter = track % projectsCount
@@ -39,6 +40,12 @@ function App() {
     setLightSymbol(lightSwitch ? 'sun' : 'moon')
 
     setLightIntensity(lightSwitch ? 0.2 : 1)
+  }
+
+  var switchPaperSpace = () => {
+    setPaperSpace((paperSpace) => !paperSpace)
+    console.log('click')
+    console.log(paperSpace)
   }
 
   function BtnPrevious() {
@@ -68,7 +75,7 @@ function App() {
   return (
     <>
       <Canvas shadows dpr={(1, 1)}>
-        {/* <Stats /> */}
+        <Stats />
         <PerspectiveCamera makeDefault position={[50, 50, 50]} fov={50} />
 
         <UpdateCamera2 target={trackCounter} />
@@ -77,10 +84,11 @@ function App() {
         <Light lightIntensity={lightIntensity} lightSwitch={lightSwitch}/>
         <NightLight lightSwitch={!lightSwitch} />
 
-        <SimpleModel />
-        {/* <P0 />
-        <P1 />
-        <P2 />
+        <SimpleModel paperSpace={paperSpace}/>
+        <PaperPlane switchPaperSpace={switchPaperSpace} />
+        <P0 paperSpace={paperSpace}/>
+        <P1 paperSpace={paperSpace}/>
+        {/* <P2 />
         <Prop /> */}
         <Plane />
         <Sky lightSwitch={lightSwitch} />

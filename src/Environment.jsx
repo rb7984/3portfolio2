@@ -1,16 +1,14 @@
-import * as THREE from 'three'
+import { useEffect} from 'react'
 import { useThree } from '@react-three/fiber'
-import { useEffect, useState } from 'react'
-import skyTexture from './SkyNight.png'
 import { useGLTF, Edges } from '@react-three/drei'
+import * as THREE from 'three'
 
-var skyDimensions = 200
+import skyTexture from './SkyNight.png'
+
+var skyDimensions = 115
 
 export function Sky({ lightSwitch }) {
   const { scene } = useThree()
-
-  // var color = lightSwitch ? '#9ec3ff' : '#3d367a'
-  // '#9ec3ff' : '#ea9eff'
 
   useEffect(() => {
     const material = new THREE.MeshBasicMaterial()
@@ -59,52 +57,48 @@ export function Plane() {
   return <primitive object={plane} />
 }
 
-export function SimpleModel() {
+export function SimpleModel({paperSpace}) {
   const { nodes, materials } = useGLTF('/assets/gl/simpleModel.glb')
 
-  var blankMaterial = new THREE.MeshStandardMaterial({ color: 'white' })
+  var blankMaterial = [
+    new THREE.MeshStandardMaterial({ color: '#f2f2f2' }),
+    new THREE.MeshStandardMaterial({ color: '#d1d1d1' }),
+    new THREE.MeshStandardMaterial({ color: '#ababab' }),
+    new THREE.MeshStandardMaterial({ color: '#787878' }),
+    new THREE.MeshStandardMaterial({ color: '#636363' })
+  ]
 
-  const [paperSpace, setPaperSpace] = useState(false);
-
-  const switchPaperSpace = () => {
-    setPaperSpace((paperSpace) => !paperSpace);
-    console.log('click');
-    console.log(paperSpace);
-  };
-
-  var edgesColor = paperSpace ? 'black' : 'white'
+  var edgesColor = paperSpace ? '#2e2e2e' : 'white'
 
   return (
     <>
-      <PaperPlane switchPaperSpace={switchPaperSpace} />
-
       <group rotation={[Math.PI / 2, 0, 0]} scale={1}>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.Grass.geometry}
-          material={paperSpace ? blankMaterial : materials['Grass']}>
+          material={paperSpace ? blankMaterial[0] : materials['Grass']}>
           <Edges color={edgesColor} threshold={0.0000005}></Edges>
         </mesh>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.Rocks.geometry}
-          material={paperSpace ? blankMaterial : materials['Rocks']}>
+          material={paperSpace ? blankMaterial[2] : materials['Rocks']}>
           <Edges color={edgesColor} threshold={0.0000005}></Edges>
         </mesh>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.Leafs.geometry}
-          material={paperSpace ? blankMaterial : materials['Foliage']}>
+          material={paperSpace ? blankMaterial[4] : materials['Foliage']}>
           <Edges color={edgesColor} threshold={0.1}></Edges>
         </mesh>
         <mesh
           castShadow
           receiveShadow
           geometry={nodes.Trunks.geometry}
-          material={paperSpace ? blankMaterial : materials['Trunk']}>
+          material={paperSpace ? blankMaterial[1] : materials['Trunk']}>
           <Edges color={edgesColor} threshold={20}></Edges>
         </mesh>
       </group>
@@ -113,23 +107,3 @@ export function SimpleModel() {
 }
 
 useGLTF.preload('/simpleModel.glb')
-
-export function PaperPlane({ switchPaperSpace }) {
-  const { nodes } = useGLTF('/assets/gl/paperPlane.glb')
-
-  var blankMaterial = new THREE.MeshStandardMaterial({ color: 'white' })
-
-  return (
-    <group onClick={switchPaperSpace} rotation={[Math.PI / 2, 0, 0]} scale={1}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Plane.geometry}
-        material={blankMaterial}>
-        <Edges color={'black'} threshold={1}></Edges>
-      </mesh>
-    </group>
-  )
-}
-
-useGLTF.preload('/paperPlane.glb')

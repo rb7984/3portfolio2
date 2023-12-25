@@ -41,17 +41,3 @@ export function P1() {
 }
 
 useGLTF.preload('/p1.glb')
-
-//Effetto carta
-/* <group rotation={[Math.PI / 2, 0, 0]} scale={1}>
-  {Object.keys(nodes).map((nodeName, index) => {
-    const geometry = nodes[nodeName].geometry;
-    const material = materials[nodeName];
-    return (
-      <React.Fragment key={index}>
-        {createEdgeLines(geometry)}
-        <mesh castShadow receiveShadow geometry={geometry} material={material} />
-      </React.Fragment>
-    );
-  })}
-</group> */
