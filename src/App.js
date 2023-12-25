@@ -1,26 +1,26 @@
+import './index.css'
+import './App.css'
 import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera } from '@react-three/drei'
 // import { Stats} from '@react-three/drei'
 import React, { useState } from 'react'
-import './index.css'
-import './App.css'
 // import { UpdateCamera } from './UpdateCamera'
-import { Model } from './Model'
+// import { Model } from './Model'
 import { Light, NightLight } from './Light'
-import { Plane, Sky } from './Environment'
+import { Plane, Sky, SimpleModel, PaperPlane } from './Environment'
 import { P0 } from './P0'
 import { P1 } from './P1'
 import { P2 } from './P2'
 import { Prop } from './Prop'
 import { Page } from './Page'
 import { UpdateCamera2 } from './UpdateCamera2'
-import { SimpleModel } from './SimpleModel'
 
 function App() {
   var [track, setTrack] = useState(0)
   var [lightSwitch, setSwitch] = useState(true)
   var [lightSymbol, setLightSymbol] = useState('moon')
   var [lightIntensity, setLightIntensity] = useState(1)
+  var [paperSwitch, switchPaperWorld] = useState(false)
 
   var projectsCount = 4
   var trackCounter = track % projectsCount
