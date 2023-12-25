@@ -7,16 +7,15 @@ import skyTexture from './SkyNight.png'
 
 var skyDimensions = 115
 
-export function Sky({ lightSwitch }) {
+export function Sky({ paperSpace, lightSwitch }) {
   const { scene } = useThree()
 
   useEffect(() => {
     const material = new THREE.MeshBasicMaterial()
 
     if (lightSwitch) {
-      var color = '#9ec3ff'
-      material.color = new THREE.Color(color)
-      scene.background = new THREE.Color(color)
+      material.color = new THREE.Color(paperSpace ? '#c9c9c9' : '#b0e1ff')
+      scene.background = new THREE.Color(paperSpace ? '#c9c9c9' : '#b0e1ff')
     } else {
       const textureLoader = new THREE.TextureLoader()
 
@@ -38,23 +37,37 @@ export function Sky({ lightSwitch }) {
     return () => {
       scene.remove(skyMesh)
     }
-  }, [lightSwitch, scene])
+  }, [paperSpace, lightSwitch, scene])
 
   return null
 }
 
-export function Plane() {
-  var geo = new THREE.CircleGeometry(skyDimensions)
-  var mat = new THREE.MeshStandardMaterial({
-    color: '#acbfbe'
-    // '#cef5f3'
-    // side: THREE.DoubleSide
-  })
-  var plane = new THREE.Mesh(geo, mat)
-  plane.rotateX(-Math.PI / 2)
-  plane.translateY(1)
-  plane.receiveShadow = true
-  return <primitive object={plane} />
+// export function Plane({ paperSpace }) {
+//   var geo = new THREE.CircleGeometry(skyDimensions)
+//   var mat = new THREE.MeshStandardMaterial({
+//     color: paperSpace ? '#2e2e2e' : '#1659c4'
+//   })
+//   var plane = new THREE.Mesh(geo, mat)
+//   plane.rotateX(-Math.PI / 2)
+//   plane.translateY(1)
+//   plane.receiveShadow = true
+//   return <primitive object={plane} />
+// }
+
+export function Plane({ paperSpace }) {
+  const geo = new THREE.CircleGeometry(skyDimensions);
+  const mat = useRef(
+    new THREE.MeshStandardMaterial({
+      color: new THREE.Color(paperSpace ? '#2e2e2e' : '#1659c4'),
+    })
+  );
+
+  useFrame(() => {
+    const targetColor = paperSpace ? new THREE.Color('#2e2e2e') : new THREE.Color('#1659c4');
+    mat.current.color.lerp(targetColor, 0.1);
+  });
+
+  return <primitive object={new THREE.Mesh(geo, mat.current)} rotation={[-Math.PI / 2, 0, 0]} />;
 }
 
 export function SimpleModel({ paperSpace }) {
@@ -112,11 +125,11 @@ export function PaperPlane({ switchPaperSpace }) {
 
   useFrame(() => {
     const circularTime = Date.now() * 0.002 + 20
-    const k = 0.2
+    const k = 0.15
     const f = 50
 
     ref.current.position.x = f * Math.sin(circularTime * k)
-    ref.current.position.y = 30 + 5 * Math.sin(circularTime * 0.5)
+    ref.current.position.y = 30 + 3 * Math.sin(circularTime * 0.5)
     ref.current.position.z = f * Math.cos(circularTime * k)
 
     // Calculate angle between radial vector and x-axis
@@ -131,13 +144,13 @@ export function PaperPlane({ switchPaperSpace }) {
       ref={ref}
       onClick={switchPaperSpace}
       rotation={[Math.PI / 2, 0, 0]}
-      scale={1}>
+      scale={1.5}>
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.PaperPlane.geometry}
         material={new THREE.MeshStandardMaterial({ color: 'white' })}>
-        <Edges color={'black'} threshold={1}></Edges>
+        <Edges color={'#2e2e2e'} threshold={1}></Edges>
       </mesh>
     </group>
   )

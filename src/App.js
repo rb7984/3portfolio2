@@ -79,14 +79,15 @@ function App() {
         <Light lightIntensity={lightIntensity} lightSwitch={lightSwitch} />
         <NightLight lightSwitch={!lightSwitch} />
 
+        <Sky paperSpace={paperSpace} lightSwitch={lightSwitch} />
+        <Plane paperSpace={paperSpace} />
         <SimpleModel paperSpace={paperSpace} />
         <PaperPlane switchPaperSpace={switchPaperSpace} />
+        
         <P0 paperSpace={paperSpace} />
         <P1 paperSpace={paperSpace} />
         {/* <P2 />
         <Prop /> */}
-        <Plane />
-        <Sky lightSwitch={lightSwitch} />
       </Canvas>
 
       {trackCounter !== 0 && <Page trackCounter={trackCounter} />}
