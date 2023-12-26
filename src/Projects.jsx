@@ -14,7 +14,7 @@ var blankMaterial = [
 export function P0({ paperSpace }) {
   const { nodes, materials } = useGLTF('/assets/gl/p0.glb')
 
-  var edgesColor = paperSpace ? 'black' : 'white'
+  var edgesColor = paperSpace ? '#2e2e2e' : '#b3b3b3'
 
   return (
     <group>
@@ -43,7 +43,7 @@ export function P0({ paperSpace }) {
 export function P1({paperSpace}) {
   const { nodes, materials } = useGLTF('/assets/gl/p1.glb')
 
-  var edgesColor = paperSpace ? 'black' : 'white'
+  var edgesColor = paperSpace ? '#2e2e2e' : '#b3b3b3'
 
   return (
     <group>
@@ -62,6 +62,30 @@ export function P1({paperSpace}) {
   )
 }
 
+export function P2({paperSpace}) {
+  const { nodes, materials } = useGLTF('/assets/gl/p2.glb')
+
+  var edgesColor = paperSpace ? '#2e2e2e' : '#b3b3b3'
+
+  return (
+    <group>
+      <LightPopup p={[-23, 20, -5]} />
+
+      <group rotation={[Math.PI / 2, 0, 0]} scale={1}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.P2.geometry}
+          material={paperSpace ? blankMaterial[2] : materials['P0_Roof']}>
+          <Edges color={edgesColor} threshold={1}></Edges>
+        </mesh>
+      </group>
+    </group>
+  )
+}
+
 useGLTF.preload('/p0.glb')
 
 useGLTF.preload('/p1.glb')
+
+useGLTF.preload('/p2.glb')

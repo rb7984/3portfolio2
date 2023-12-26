@@ -7,6 +7,14 @@ import skyTexture from './SkyNight.png'
 
 var skyDimensions = 115
 
+var blankMaterial = [
+  new THREE.MeshStandardMaterial({ color: '#f2f2f2' }),
+  new THREE.MeshStandardMaterial({ color: '#d1d1d1' }),
+  new THREE.MeshStandardMaterial({ color: '#ababab' }),
+  new THREE.MeshStandardMaterial({ color: '#787878' }),
+  new THREE.MeshStandardMaterial({ color: '#636363' })
+]
+
 export function Sky({ paperSpace, lightSwitch }) {
   const { scene } = useThree()
 
@@ -55,19 +63,26 @@ export function Sky({ paperSpace, lightSwitch }) {
 // }
 
 export function Plane({ paperSpace }) {
-  const geo = new THREE.CircleGeometry(skyDimensions);
+  const geo = new THREE.CircleGeometry(skyDimensions)
   const mat = useRef(
     new THREE.MeshStandardMaterial({
-      color: new THREE.Color(paperSpace ? '#2e2e2e' : '#1659c4'),
+      color: new THREE.Color(paperSpace ? '#2e2e2e' : '#1659c4')
     })
-  );
+  )
 
   useFrame(() => {
-    const targetColor = paperSpace ? new THREE.Color('#2e2e2e') : new THREE.Color('#1659c4');
-    mat.current.color.lerp(targetColor, 0.1);
-  });
+    const targetColor = paperSpace
+      ? new THREE.Color('#2e2e2e')
+      : new THREE.Color('#1659c4')
+    mat.current.color.lerp(targetColor, 0.1)
+  })
 
-  return <primitive object={new THREE.Mesh(geo, mat.current)} rotation={[-Math.PI / 2, 0, 0]} />;
+  return (
+    <primitive
+      object={new THREE.Mesh(geo, mat.current)}
+      rotation={[-Math.PI / 2, 0, 0]}
+    />
+  )
 }
 
 export function SimpleModel({ paperSpace }) {
@@ -81,7 +96,7 @@ export function SimpleModel({ paperSpace }) {
     new THREE.MeshStandardMaterial({ color: '#636363' })
   ]
 
-  var edgesColor = paperSpace ? '#2e2e2e' : 'white'
+  var edgesColor = paperSpace ? '#2e2e2e' : '#b3b3b3'
 
   return (
     <>
@@ -126,16 +141,14 @@ export function PaperPlane({ switchPaperSpace }) {
   useFrame(() => {
     const circularTime = Date.now() * 0.002 + 20
     const k = 0.15
-    const f = 50
+    const f = 40
 
     ref.current.position.x = f * Math.sin(circularTime * k)
-    ref.current.position.y = 30 + 3 * Math.sin(circularTime * 0.5)
+    ref.current.position.y = 20 + 3 * Math.sin(circularTime * 0.5)
     ref.current.position.z = f * Math.cos(circularTime * k)
 
-    // Calculate angle between radial vector and x-axis
     const angle = Math.atan2(ref.current.position.z, ref.current.position.x)
 
-    // Set rotation to align with the tangent vector
     ref.current.rotation.z = angle + Math.PI
   })
 
@@ -144,7 +157,7 @@ export function PaperPlane({ switchPaperSpace }) {
       ref={ref}
       onClick={switchPaperSpace}
       rotation={[Math.PI / 2, 0, 0]}
-      scale={1.5}>
+      scale={1}>
       <mesh
         castShadow
         receiveShadow
@@ -156,6 +169,44 @@ export function PaperPlane({ switchPaperSpace }) {
   )
 }
 
+export function Prop({ paperSpace }) {
+  const { nodes, materials } = useGLTF('/assets/gl/prop.glb')
+  const ref = useRef()
+
+  useFrame(({ clock }) => {
+    var a = clock.getElapsedTime() / 2
+
+    ref.current.position.x = 2.5 * Math.sin(a) + 2.5
+    ref.current.position.y = 8.5 * Math.sin(a) + 8.5
+    ref.current.position.z = 11.5 * Math.sin(a) + 11.5
+  })
+
+  var edgesColor = paperSpace ? '#2e2e2e' : '#b3b3b3'
+
+  return (
+    <group ref={ref} dispose={null}>
+      <group rotation={[Math.PI / 2, 0, 0]} scale={1}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Prop_Cabin.geometry}
+          material={paperSpace ? blankMaterial[0] : materials['P1_Blocks']}>
+          <Edges color={edgesColor} threshold={1}></Edges>
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Prop_Doors.geometry}
+          material={paperSpace ? blankMaterial[2] : materials['P0_Roof']}>
+          <Edges color={edgesColor} threshold={1}></Edges>
+        </mesh>
+      </group>
+    </group>
+  )
+}
+
 useGLTF.preload('/simpleModel.glb')
 
 useGLTF.preload('/paperPlane.glb')
+
+useGLTF.preload('/prop.glb')

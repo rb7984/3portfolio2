@@ -1,15 +1,11 @@
 import './index.css'
 import './App.css'
 import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera } from '@react-three/drei'
-import { Stats } from '@react-three/drei'
+import { PerspectiveCamera, Stats } from '@react-three/drei'
 import React, { useState } from 'react'
-// import { UpdateCamera } from './UpdateCamera'
 import { Light, NightLight } from './Light'
-import { Plane, Sky, SimpleModel, PaperPlane } from './Environment'
-import { P0, P1 } from './Projects'
-// import { P2 } from './P2'
-// import { Prop } from './Prop'
+import { Plane, Sky, SimpleModel, PaperPlane, Prop } from './Environment'
+import { P0, P1, P2 } from './Projects'
 import { Page } from './Page'
 import { UpdateCamera2 } from './UpdateCamera2'
 
@@ -86,8 +82,8 @@ function App() {
         
         <P0 paperSpace={paperSpace} />
         <P1 paperSpace={paperSpace} />
-        {/* <P2 />
-        <Prop /> */}
+        <P2 paperSpace={paperSpace} />
+        <Prop paperSpace={paperSpace} />
       </Canvas>
 
       {trackCounter !== 0 && <Page trackCounter={trackCounter} />}

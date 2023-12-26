@@ -24,10 +24,10 @@ export const UpdateCamera2 = React.memo(({ target }) => {
     if (target === 0) {
       const circularTime = Date.now() * 0.002 + 20
       const k = 0.1
-      const f = 100
+      const f = 90
 
       state.camera.position.x = f * Math.sin(circularTime * k)
-      state.camera.position.y = 50
+      state.camera.position.y = 40
       state.camera.position.z = f * Math.cos(circularTime * k)
 
       state.camera.lookAt(0, 0, 0)
