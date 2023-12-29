@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
-import { useGLTF, Edges } from '@react-three/drei'
+import { useGLTF, Edges, useAnimations } from '@react-three/drei'
 import * as THREE from 'three'
 
 import skyTexture from './SkyNight.png'
+import bannerTexture from './banner.png'
 
 var skyDimensions = 115
 
@@ -169,6 +170,55 @@ export function PaperPlane({ switchPaperSpace }) {
   )
 }
 
+export function PaperPlaneBanner({ switchPaperSpace }) {
+  const group = useRef()
+  const { nodes, animations } = useGLTF('assets/gl/paperPlaneAnimation.glb')
+  const { actions } = useAnimations(animations, group)
+
+  const material = new THREE.MeshBasicMaterial()
+  material.side = THREE.DoubleSide
+  const textureLoader = new THREE.TextureLoader()
+  const texture = textureLoader.load(bannerTexture)
+
+  material.map = texture
+
+  useEffect(() => {
+    actions.ArmatureAction.play()
+  })
+
+  useFrame(() => {
+    const circularTime = Date.now() * 0.002 + 20
+    const k = 0.15
+    const f = 40
+
+    group.current.position.x = f * Math.sin(circularTime * k)
+    group.current.position.y = 20 + 3 * Math.sin(circularTime * 0.5)
+    group.current.position.z = f * Math.cos(circularTime * k)
+
+    const angle = Math.atan2(group.current.position.x, group.current.position.z)
+
+    group.current.rotation.y = angle + Math.PI / 2
+  })
+
+  return (
+    <group ref={group} dispose={null}>
+      <group name="Scene">
+        <group
+          name="Armature"
+          position={[-0.23, 0.66, -2.74]}
+          rotation={[-Math.PI / 2, 0, 0]}>
+          <primitive object={nodes.Bone} />
+          <skinnedMesh
+            name="PaperPlane_Banner"
+            geometry={nodes.PaperPlane_Banner.geometry}
+            material={material}
+            skeleton={nodes.PaperPlane_Banner.skeleton}></skinnedMesh>
+        </group>
+      </group>
+    </group>
+  )
+}
+
 export function Prop({ paperSpace }) {
   const { nodes, materials } = useGLTF('/assets/gl/prop.glb')
   const ref = useRef()
@@ -210,3 +260,5 @@ useGLTF.preload('/simpleModel.glb')
 useGLTF.preload('/paperPlane.glb')
 
 useGLTF.preload('/prop.glb')
+
+useGLTF.preload('/paperPlaneAnimation.glb')

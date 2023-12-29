@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera, Stats } from '@react-three/drei'
 import React, { useState } from 'react'
 import { Light, NightLight } from './Light'
-import { Plane, Sky, SimpleModel, PaperPlane, Prop } from './Environment'
+import { Plane, Sky, SimpleModel, PaperPlane, PaperPlaneBanner, Prop } from './Environment'
 import { P0, P1, P2 } from './Projects'
 import { Page } from './Page'
 import { UpdateCamera2 } from './UpdateCamera2'
@@ -79,6 +79,7 @@ function App() {
         <Plane paperSpace={paperSpace} />
         <SimpleModel paperSpace={paperSpace} />
         <PaperPlane switchPaperSpace={switchPaperSpace} />
+        <PaperPlaneBanner switchPaperSpace={switchPaperSpace} />
         
         <P0 paperSpace={paperSpace} />
         <P1 paperSpace={paperSpace} />
